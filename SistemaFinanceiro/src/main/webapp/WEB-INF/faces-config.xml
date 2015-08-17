@@ -10,4 +10,10 @@
 		</locale-config>
 	</application>
 	
+	<application>
+		<message-bundle>
+		com.algaworks.resources.Messages
+		</message-bundle>
+	</application>
+	
 </faces-config>
