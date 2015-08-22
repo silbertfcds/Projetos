@@ -19,10 +19,10 @@ public class CriaLancamentos {
 		trx.begin();
 		
 		Calendar dataVencimento1 = Calendar.getInstance();
-		dataVencimento1.set(2015, 10, 1, 0, 0, 0);
+		dataVencimento1.set(2016, 10, 1, 0, 0, 0);
 		
 		Calendar dataVencimento2 = Calendar.getInstance();
-		dataVencimento2.set(2015, 12, 1, 0, 0, 0);
+		dataVencimento2.set(2016, 12, 1, 0, 0, 0);
 		
 		Pessoa cliente = new Pessoa();
 		cliente.setNome("WWW Indústria de Alimentos");
@@ -35,7 +35,7 @@ public class CriaLancamentos {
 		lancamento1.setPessoa(cliente);
 		lancamento1.setDataVencimento(dataVencimento1.getTime());
 		lancamento1.setDataPagamento(dataVencimento1.getTime());
-		lancamento1.setValor(new BigDecimal(103_000));
+		lancamento1.setValor(new BigDecimal(30_000));
 		lancamento1.setTipo(TipoLancamento.RECEITA);
 		
 		Lancamento lancamento2 = new Lancamento();
@@ -43,14 +43,14 @@ public class CriaLancamentos {
 		lancamento2.setPessoa(cliente);
 		lancamento2.setDataVencimento(dataVencimento1.getTime());
 		lancamento2.setDataPagamento(dataVencimento1.getTime());
-		lancamento2.setValor(new BigDecimal(15_000));
+		lancamento2.setValor(new BigDecimal(50_000));
 		lancamento2.setTipo(TipoLancamento.RECEITA);
 		
 		Lancamento lancamento3 = new Lancamento();
 		lancamento3.setDescricao("Treinamento da equipe");
 		lancamento3.setPessoa(fornecedor);
 		lancamento3.setDataVencimento(dataVencimento2.getTime());
-		lancamento3.setValor(new BigDecimal(68_000));
+		lancamento3.setValor(new BigDecimal(102_000));
 		lancamento3.setTipo(TipoLancamento.DESPESA);
 		
 		manager.persist(cliente);

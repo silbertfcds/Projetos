@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+
 
 import sistema.financeiro.model.Lancamento;
 import sistema.financeiro.model.Pessoa;
@@ -19,7 +16,6 @@ import sistema.financeiro.repository.Lancamentos;
 import sistema.financeiro.repository.Pessoas;
 import sistema.financeiro.service.CadastroLancamentos;
 import sistema.financeiro.service.NegocioException;
-import sistema.financeiro.util.JpaUtil;
 
 
 @Named
@@ -27,6 +23,9 @@ import sistema.financeiro.util.JpaUtil;
 public class CadastroLancamentoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private Lancamentos lancamentos;
 	
 	@Inject
 	private CadastroLancamentos cadastro;
@@ -39,14 +38,18 @@ public class CadastroLancamentoBean implements Serializable {
 	
 	
 	public void prepararCadastro(){
-		todasPessoas = pessoas.todas();
+		this.todasPessoas = this.pessoas.todas();
+		if(lancamento==null){
+			lancamento = new Lancamento();
+		}
 	}
+	
 	public void salvar(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		
 		try{
-			cadastro.salvar(lancamento);
-			lancamento = new Lancamento();
+			this.cadastro.salvar(this.lancamento);
+			this.lancamento = new Lancamento();
 			context.addMessage(null, new FacesMessage("Lançamento salvo com sucesso!"));
 		}catch(NegocioException e){
 			FacesMessage mensagem = new FacesMessage(e.getMessage());
@@ -54,6 +57,9 @@ public class CadastroLancamentoBean implements Serializable {
 			context.addMessage(null, mensagem);
 		}
 		
+	}
+	public List<String> pesquisarDescricoes(String descricao){
+		return lancamentos.descricoesQueContem(descricao);
 	}
 	
 	public TipoLancamento[] getTiposLancamentos(){
@@ -67,7 +73,7 @@ public class CadastroLancamentoBean implements Serializable {
 		this.lancamento = lancamento;
 	}
 	public List<Pessoa> getTodasPessoas() {
-		return todasPessoas;
+		return this.todasPessoas;
 	}
 	
 	
