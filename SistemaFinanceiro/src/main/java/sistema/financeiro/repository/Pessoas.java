@@ -15,18 +15,23 @@ public class Pessoas implements Serializable {
 	
 	private EntityManager manager;
 	
-
-	public void adicionar(Pessoa pessoa){
-		manager.persist(pessoa);
-	}
-	
 	@Inject
 	public Pessoas(EntityManager manager){
 		this.manager = manager;
 	}
 	
+	public void adicionar(Pessoa pessoa){
+		manager.persist(pessoa);
+	}
+	
+	public Pessoa guardar(Pessoa pessoa){
+		return manager.merge(pessoa);
+	}
 	public Pessoa porId(Long id){
 		return manager.find(Pessoa.class, id);
+	}
+	public void remover(Pessoa pessoa){
+		manager.remove(pessoa);
 	}
 	
 	public List<Pessoa> todas(){

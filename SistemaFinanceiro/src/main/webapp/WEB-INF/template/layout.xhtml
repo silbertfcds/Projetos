@@ -17,7 +17,9 @@
 <h:body>
 	
 	<header>
-	
+		<div style="float: right; margin-right: 20px; margin-top: 8px">
+			Olá #{usuario.nome}!
+		</div>
 	</header>
 	
 	<h:form>
@@ -30,13 +32,12 @@
 			</p:submenu>
 			
 			<p:submenu label="Consultas">
-				<p:menuitem value="Pessoas" />
-				<p:menuitem value="Lançamentos"
-				action="/ConsultaLancamentos?faces-redirect=true" />
+				<p:menuitem value="Pessoas" action="/ConsultaPessoas?faces-redirect=true"/>
+				<p:menuitem value="Lançamentos" action="/ConsultaLancamentos?faces-redirect=true" />
 			</p:submenu>
 			
 			<p:submenu label="Sistema">
-				<p:menuitem value="Sair" />
+				<p:menuitem value="Sair" action="#{loginBean.logout}"/>
 			</p:submenu>
 			
 		</p:menubar>
