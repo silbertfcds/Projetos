@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import model.Orcamento;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -14,7 +16,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import repository.filter.OrcamentoFilter;
-import model.Orcamento;
+import util.jsf.FacesUtil;
 
 public class Orcamentos implements Serializable{
 
@@ -38,11 +40,11 @@ public class Orcamentos implements Serializable{
 				
 
 		if (filtro.getDataCriacaoDe() != null) {
-			criteria.add(Restrictions.ge("criacao", filtro.getDataCriacaoDe()));
+			criteria.add(Restrictions.ge("criacao", FacesUtil.configurarTempoDataDe(filtro.getDataCriacaoDe())));
 		}
 		
 		if (filtro.getDataCriacaoAte() != null) {
-			criteria.add(Restrictions.le("criacao", filtro.getDataCriacaoAte()));
+			criteria.add(Restrictions.le("criacao", FacesUtil.configurarTempoDataAte(filtro.getDataCriacaoAte())));
 		}
 		
 		if (StringUtils.isNotBlank(filtro.getNomeCliente())) {
@@ -57,7 +59,6 @@ public class Orcamentos implements Serializable{
 		
 		return manager.find(Orcamento.class, id);
 	}
-
 	
 }
 
