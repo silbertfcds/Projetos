@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Inclusão de item" id="dialogItem"
+		widgetVar="adicionarItemDialog" modal="true" resizable="false">
+		<h:panelGroup id="inclusaoPanelItem">
+			<p:messages autoUpdate="true" closable="true" />
+			<h:panelGrid id="painelItem" columns="2">
+				<p:outputLabel value="Nome do item:  " for="nomeItem"/>
+				<p:inputText id="nomeItem" size="20" value="#{orcamentoBean.item.descricao}" />
+				
+				<p:outputLabel value="Quantidade  " />
+				<p:inputText size="20" value="#{orcamentoBean.item.quantidade}" />
+				
+				<p:outputLabel value="Valor unitário:  " for="valor" />
+				<p:inputText id="valor" size="20" value="#{orcamentoBean.item.valorUnitario}" />
+
+				<p:spacer />
+				<p:commandButton value="Incluir" style="margin-top: 20px"
+					action="#{orcamentoBean.adicionarItem}" process="painelItem"
+					update=":frmCadastroOrcamento:tabView:itensTabela, :frmCadastroOrcamento:totalPedido" />
+			</h:panelGrid>
+
+		</h:panelGroup>
+	</p:dialog>
+
+	<p:confirmDialog header="Exclusão de item"
+		message="Tem certeza que deseja excluir o item"
+		widgetVar="confirmacaoItem" id="exclusaoConfirmacaoItem">
+		<p:button value="Não"
+			onclick="PF('confirmacaoItem').hide(); return false;" />
+		<p:commandButton value="Sim"
+			oncomplete="PF('confirmacaoItem').hide(); return false;"
+			process="@this"
+			action="#{orcamentoBean.excluirItem}" update=":frmCadastroOrcamento:tabView:itensTabela, :frmCadastroOrcamento:totalPedido" />
+	</p:confirmDialog>
+
+</ui:composition>
