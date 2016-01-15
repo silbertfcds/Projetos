@@ -59,10 +59,15 @@
 	    				<f:convertNumber type="currency"/>
 	    			</h:outputText>
 	    		</p:column>
-	    		<p:column style="text-align: center; width: 50px">
+	    		<p:column style="text-align: center; width: 100px">
 	    			<p:button icon="ui-icon-pencil" title="Editar" outcome="/orcamentos/cadastroOrcamento">
 	    				<f:param name="orcamento" value="#{orcamento.id}"/>
 	    			</p:button>
+	    			<p:commandButton icon="ui-icon-print" immediate="true"
+						title="Imprimir orçamento" action="#{orcamentoBean.imprimir}"  ajax="false">
+							<f:setPropertyActionListener target="#{orcamentoBean.orcamento.id}"
+								value="#{orcamento.id}" /> 
+					</p:commandButton>
 	    		</p:column>
 	    	</p:dataTable>
 	    	
