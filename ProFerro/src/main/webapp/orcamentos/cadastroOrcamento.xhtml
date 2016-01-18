@@ -11,8 +11,8 @@
 		<f:event listener="#{orcamentoBean.inicializar}" type="preRenderView" />
 	</f:metadata>
 
-    <ui:define name="titulo">Novo Orçamento</ui:define>
-    
+	<ui:define name="titulo">#{orcamentoBean.editando ? 'Edição de orçamento' : 'Novo Orçamento'}</ui:define>
+	
     <ui:define name="corpo">
     	<h:form id="frmCadastroOrcamento">
 	    	<h1>Novo Orçamento</h1>

@@ -10,7 +10,7 @@
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
          <title><ui:insert name="titulo">ProFerro</ui:insert></title> 
          <h:outputStylesheet library="css" name="sistema.css" />
-         <h:outputScript library="js" name="jquery.maskMoney.js"></h:outputScript> 
+         <h:outputScript library="js" name="jquery.maskMoney.js"></h:outputScript>
  	</h:head> 
  
  
@@ -27,6 +27,7 @@
  		<header> 
  			<div style="float: left"> 
  				<h:link outcome="/Home"> 
+ 					<h1 class="logo">ProFerro</h1>
  					<!--<h:graphicImage library="images" name="logo-algaworks.png" />--> 
  				</h:link> 
  			</div> 
@@ -36,16 +37,16 @@
  				<h:form style="display: inline-block">
  					<p:menubar styleClass="menu-sistema">
  						<p:submenu label="Cadastros">
- 							<p:menuitem value="Clientes" outcome="/clientes/cadastroCliente"/>
- 							<p:menuitem value="Usuários" outcome="/usuarios/cadastroUsuario"/>
+ 							<p:menuitem value="Clientes" outcome="/clientes/cadastroCliente" icon="ui-icon-person"/>
+ 							<p:menuitem value="Usuários" outcome="/usuarios/cadastroUsuario" icon="ui-icon-person"/>
  							<p:separator/>
  						</p:submenu>
  						
 	 					<p:submenu label="Orçamentos">
-	 						<p:menuitem value="Novo Orçamento" outcome="/orcamentos/cadastroOrcamento"/>
-	 						<p:menuitem value="Pesquisa" outcome="/orcamentos/pesquisaOrcamento"/>
+	 						<p:menuitem value="Novo Orçamento" outcome="/orcamentos/cadastroOrcamento" icon="ui-icon-document"/>
+	 						<p:menuitem value="Pesquisa" outcome="/orcamentos/pesquisaOrcamento" icon="ui-icon-search"/>
 	 					</p:submenu>
- 						<p:menuitem value="Sair" url="/j_spring_security_logout"/>
+ 						<p:menuitem value="Sair" url="/j_spring_security_logout" icon="ui-icon-power"/>
  					</p:menubar>
  				</h:form>
  			</div>

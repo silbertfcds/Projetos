@@ -20,12 +20,12 @@
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/usuarios/cadastroUsuario" />
-					<p:commandButton value="Salvar" id="botaoSalvar" action="#{usuarioBean.salvar}"
+					<p:button value="Novo" outcome="/usuarios/cadastroUsuario" icon="ui-icon-document"/>
+					<p:commandButton value="Salvar" id="botaoSalvar" action="#{usuarioBean.salvar}" icon="ui-icon-disk"
 						update="@form"/>
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" outcome="/usuarios/pesquisaUsuario" />
+					<p:button value="Pesquisa" outcome="/usuarios/pesquisaUsuario" icon="ui-icon-search"/>
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -51,7 +51,7 @@
 						itemLabel="#{grupo.descricao}" />
 				</p:selectOneMenu>
 				<p:commandButton value="Adicionar grupo" action="#{usuarioBean.adicionarGrupo}"
-					process="usuarioPanel" update=":frmGrupo:grupoTable"/>
+					process="usuarioPanel" update=":frmGrupo:grupoTable" icon="ui-icon-circle-plus"/>
 
 			</p:panelGrid>
 			
