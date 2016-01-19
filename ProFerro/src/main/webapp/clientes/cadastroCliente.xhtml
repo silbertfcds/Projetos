@@ -33,7 +33,7 @@
 
 				<p:outputLabel value="Nome" for="nome"/>
 				<p:inputText id="nome" size="60" maxlength="80"
-					value="#{clienteBean.cliente.nome}" />
+					value="#{clienteBean.cliente.nome}" onkeyup="validar(this,'text');"/>
 
 				<p:outputLabel value="Tipo" for="tipo" />
 				<h:panelGroup>
@@ -48,7 +48,7 @@
 
 				<p:outputLabel value="CNPJ/CPF" for="cnpj" />
 				<p:inputText id="cnpj" size="20" maxlength="30"
-					value="#{clienteBean.cliente.documentoReceitaFederal}" />
+					value="#{clienteBean.cliente.documentoReceitaFederal}" onkeyup="validar(this,'num');"/>
 
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="40" maxlength="60"
@@ -68,28 +68,27 @@
 					<h:panelGrid  id="painelEndereco" columns="2">
 						<p:outputLabel value="Logradouro" />
 						<p:inputText size="35" 
-							value="#{clienteBean.endereco.logradouro}" />
+							value="#{clienteBean.endereco.logradouro}" onkeyup="validar(this,'text');"/>
 
 						<p:outputLabel value="Número" />
 						<p:inputText size="5"  
-							value="#{clienteBean.endereco.numero}"/>
+							value="#{clienteBean.endereco.numero}" onkeyup="validar(this,'num');"/>
 
 						<p:outputLabel value="Complemento" />
 						<p:inputText 
 							value="#{clienteBean.endereco.complemento}"/>
 
 						<p:outputLabel value="CEP" />
-						<p:inputText size="15"  
-							value="#{clienteBean.endereco.cep}"/>
+						<p:inputMask value="#{clienteBean.endereco.cep}" mask="99999-999"/>
 
 						<p:outputLabel value="Cidade" />
 						<h:panelGroup>
 							<p:inputText 
-								value="#{clienteBean.endereco.cidade}"/>
+								value="#{clienteBean.endereco.cidade}" onkeyup="validar(this,'text');"/>
 
 							<p:outputLabel value="UF" style="margin-left: 20px" />
 							<p:inputText  size="2" 
-								value="#{clienteBean.endereco.uf}"/>
+								value="#{clienteBean.endereco.uf}" onkeyup="validar(this,'text');"/>
 						</h:panelGroup>
 						<p:spacer />
 						<p:commandButton value="Incluir" style="margin-top: 20px" 
@@ -107,8 +106,7 @@
 
 					<h:panelGrid  id="painelTelefone" columns="2">
 						<p:outputLabel value="Número:  " />
-						<p:inputText size="20"  
-							value="#{clienteBean.telefone.numero}"/>
+						<p:inputMask value="#{clienteBean.telefone.numero}" mask="(999) 9999-9999"/>
 						<p:outputLabel value="Tipo:"/>
 						<h:panelGroup>
 							<p:selectOneRadio id="tipoTelefone" styleClass="meu-radio" required="true"

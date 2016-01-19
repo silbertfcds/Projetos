@@ -25,7 +25,7 @@
 	    			columnClasses="rotulo, campo">
 	    		
 	    		<p:outputLabel value="Nome" />
-	    		<p:inputText size="60" value="#{pesquisaUsuarioBean.filtro.nome}"/>
+	    		<p:inputText size="60" value="#{pesquisaUsuarioBean.filtro.nome}" onkeyup="validar(this,'text');"/>
 	    		
 	    	</p:panelGrid>
 	    	

@@ -13,10 +13,13 @@
 				<p:inputText id="nomeItem" size="20" value="#{orcamentoBean.item.descricao}" />
 				
 				<p:outputLabel value="Quantidade  " />
-				<p:inputText size="20" value="#{orcamentoBean.item.quantidade}" />
+				<p:inputText size="20" value="#{orcamentoBean.item.quantidade}" onkeyup="validar(this,'num');"/>
 				
 				<p:outputLabel value="Valor unitário:  " for="valor" />
-				<p:inputText id="valor" size="20" value="#{orcamentoBean.item.valorUnitario}" />
+				<p:inputText id="valor" size="20" value="#{orcamentoBean.item.valorUnitario}" 
+					styleClass="moeda">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+				</p:inputText>
 
 				<p:spacer />
 				<p:commandButton value="Incluir" style="margin-top: 20px"

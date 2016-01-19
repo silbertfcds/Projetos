@@ -25,10 +25,10 @@
 	    			columnClasses="rotulo, campo">
 	    		    		
 	    		<p:outputLabel value="CPF/CNPJ" />
-	    		<p:inputText size="20" value="#{pesquisaClienteBean.filtro.documentoReceitaFederal}"/>
+	    		<p:inputText size="20" value="#{pesquisaClienteBean.filtro.documentoReceitaFederal}" onkeyup="validar(this,'num');"/>
 	    		
 	    		<p:outputLabel value="Nome" />
-	    		<p:inputText size="60" value="#{pesquisaClienteBean.filtro.nome}"/>
+	    		<p:inputText size="60" value="#{pesquisaClienteBean.filtro.nome}" onkeyup="validar(this,'text');"/>
 	    		
 	    	</p:panelGrid>
 	    	

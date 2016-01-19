@@ -16,7 +16,7 @@
         <p:outputLabel value="Cliente" for="cliente"/>
         <p:autoComplete id="cliente" size="40" dropdown="true" 
         	value="#{orcamentoBean.orcamento.cliente}" completeMethod="#{orcamentoBean.completarCliente}"
-        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" />
+        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" onkeyup="validar(this,'text');"/>
         
         <p:outputLabel value="Total do orçamento" style="font-weight: bold; font-size: 1.1em"/>
         <h:outputText value="#{orcamentoBean.orcamento.valorTotal}" 

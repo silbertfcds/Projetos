@@ -34,7 +34,7 @@
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="50" maxlength="80"
-					value="#{usuarioBean.usuario.nome}" />
+					value="#{usuarioBean.usuario.nome}" onkeyup="validar(this,'text');"/>
 
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="50" maxlength="60" 
