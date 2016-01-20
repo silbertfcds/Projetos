@@ -12,37 +12,32 @@
 
 	<ui:define name="corpo">
 		<h:form id="frmEvento">
-    		<p:growl id="messages" showDetail="true" />
-
-		
 
 			<h:panelGrid columnClasses="value">
         		<p:commandButton value="Evento" style="margin-top: 20px"
 				onclick="PF('adicionarEventoDialog').show(); return false" icon="ui-icon-circle-plus"/>
 		
-        		<p:schedule id="calendario" value="#{scheduleView.eventModel}" timeZone="GMT-3"/>
+        		<p:schedule id="calendario" value="#{scheduleView.eventModel}" timeZone="GMT-3" draggable="false"/>
     		</h:panelGrid>
 
 
 			<p:dialog header="Evento" id="dialogEvento"
 				widgetVar="adicionarEventoDialog" modal="true" resizable="false">
 				<h:panelGroup id="inclusaoPanelEvento">
-
 					<h:panelGrid id="painelEvento" columns="2">
 						<p:outputLabel value="Titulo:  " />
-						<p:inputText value="#{scheduleView.titulo}"/>
+						<p:inputText value="#{scheduleView.evento.titulo}"/>
 						
 						<p:outputLabel value="De:  " />
-						<p:calendar id="datetimeDe" value="#{scheduleView.dateDe}" pattern="MM/dd/yyyy HH:mm:ss" showOn="button"/>
+						<p:calendar id="datetimeDe" value="#{scheduleView.evento.dataDe}" pattern="dd/MM/yyyy HH:mm:ss" showOn="button"/>
 	    					
  						<p:outputLabel value="Até:  " />
-    					<p:calendar id="datetimeAte" value="#{scheduleView.dateAte}" pattern="MM/dd/yyyy HH:mm:ss" showOn="button"/>
+    					<p:calendar id="datetimeAte" value="#{scheduleView.evento.dataAte}" pattern="dd/MM/yyyy HH:mm:ss" showOn="button"/>
 	    					
 						<p:spacer />
 						<p:commandButton value="Incluir" style="margin-top: 20px"
 							action="#{scheduleView.salvar}"
-							process="painelEvento" update=":frmEvento:calendario"
-							ajax="true" />
+							process="painelEvento" update=":frmEvento:calendario" />
 					</h:panelGrid>
 
 				</h:panelGroup>

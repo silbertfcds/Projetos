@@ -40,21 +40,21 @@
 	    	<p:dataTable id="orcamentosTable" value="#{pesquisaOrcamentoBean.orcamentosFiltrados}" var="orcamento"
 	    		style="margin-top: 20px" emptyMessage="Nenhum orçamento encontrado."
 	    		rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
-	    		<p:column headerText="Número">
+	    		<p:column headerText="Número" style="text-align: center; width: 7%">
 	    			<h:outputText value="#{orcamento.id}"/>
 	    		</p:column>
-	    		<p:column headerText="Orcamento">
+	    		<p:column headerText="Orcamento" style="text-align: left; width: 30%">
 	    			<h:outputText value="#{orcamento.descricao}"/>
 	    		</p:column>
-	    		<p:column headerText="Cliente">
+	    		<p:column headerText="Cliente" style="text-align: left; width: 30%">
 	    			<h:outputText value="#{orcamento.cliente.nome}"/>
 	    		</p:column>
-	    		<p:column headerText="Data de criação" style="text-align: center; width: 140px">
+	    		<p:column headerText="Data de criação" style="text-align: center; width: 10%">
 	    			<h:outputText value="#{orcamento.criacao}">
 	    				<f:convertDateTime pattern="dd/MM/yyyy"/>
 	    			</h:outputText>
 	    		</p:column>
-	    		<p:column headerText="Valor total" style="text-align: right; width: 120px">
+	    		<p:column headerText="Valor total" style="text-align: right; width: 10%">
 	    			<h:outputText value="#{orcamento.valorTotal}">
 	    				<f:convertNumber type="currency"/>
 	    			</h:outputText>

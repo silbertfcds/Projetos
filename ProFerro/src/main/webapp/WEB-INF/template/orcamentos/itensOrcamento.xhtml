@@ -6,20 +6,20 @@
 
 	<p:dataTable  var="item" id="itensTabela" rowIndexVar="linha" value="#{orcamentoBean.orcamento.itens}"
 		emptyMessage="Nenhum item cadastrado.">
-		<p:column headerText="Item" style="text-align: left; width: 10%">
+		<p:column headerText="Item" style="text-align: left; width:40%">
 			<h:outputText value="#{item.descricao}" />
 		</p:column>
 		
-		<p:column headerText="Quantidade" style="text-align: left; width: 10%">
+		<p:column headerText="Quantidade" style="text-align: center; width: 5%">
 			<h:outputText value="#{item.quantidade}" />
 		</p:column>
 		
-		<p:column headerText="Valor Unitário" style="text-align: left; width: 10%">
+		<p:column headerText="Valor Unitário" style="text-align: right; width: 10%">
 			<h:outputText value="#{item.valorUnitario}">
 				<f:convertNumber type="currency"/>
 			</h:outputText>
 		</p:column>
-		<p:column style="text-align: center; width: 8%">
+		<p:column style="text-align: center; width: 3%">
 			<p:commandButton icon="ui-icon-trash" title="Excluir"
 				oncomplete="PF('confirmacaoItem').show()">
 				<f:setPropertyActionListener value="#{item}"
