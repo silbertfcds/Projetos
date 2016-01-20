@@ -32,6 +32,7 @@ public class ClienteBean implements Serializable {
 	
 	private Telefone telefone;
 
+	private boolean mostrarPessoa = false;
 	
 	public ClienteBean() {
 		limpar();
@@ -43,6 +44,13 @@ public class ClienteBean implements Serializable {
 		FacesUtil.addInfoMessage("Cliente salvo com sucesso!");
 	}
 	
+	public void mostrarQuebraTipoPessoa(){
+		if(cliente.getTipoPessoa().getDescricao().equals("Fisica")){
+			mostrarPessoa = true;
+		}else{
+			mostrarPessoa = false;
+		}
+	}
 	public void adicionarEndereco(){	
 		if(endereco!=null){
 			cliente.getEnderecos().add(endereco);
@@ -128,6 +136,13 @@ public class ClienteBean implements Serializable {
 	public void setTelefone(Telefone telefone) {
 		this.telefone = telefone;
 	}
-	
+
+	public boolean isMostrarPessoa() {
+		return mostrarPessoa;
+	}
+
+	public void setMostrarPessoa(boolean mostrarPessoa) {
+		this.mostrarPessoa = mostrarPessoa;
+	}
 	
 }

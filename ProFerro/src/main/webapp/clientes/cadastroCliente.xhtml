@@ -37,19 +37,36 @@
 
 				<p:outputLabel value="Tipo" for="tipo" />
 				<h:panelGroup>
-
 					<p:selectOneRadio id="tipo" styleClass="meu-radio" required="true"
 						value="#{clienteBean.cliente.tipoPessoa}">
 						<f:selectItems value="#{clienteBean.tiposPessoas}"
 							var="tipoPessoa" itemValue="#{tipoPessoa}"
 							itemLabel="#{tipoPessoa.descricao}" />
+						<p:ajax event="change" listener="#{clienteBean.mostrarQuebraTipoPessoa}" 
+							update=":frmCliente:panelPessoa, :frmCliente:panelPessoaInput " />
 					</p:selectOneRadio>
 				</h:panelGroup>
-
-				<p:outputLabel value="CNPJ/CPF" for="cnpj" />
-				<p:inputText id="cnpj" size="20" maxlength="30"
-					value="#{clienteBean.cliente.documentoReceitaFederal}" onkeyup="validar(this,'num');"/>
-
+				
+				<h:panelGroup id="panelPessoa">
+					<h:panelGroup rendered="#{clienteBean.mostrarPessoa}">
+						<p:outputLabel value="CPF" for="cpf" />
+					</h:panelGroup>
+					<h:panelGroup rendered="#{!clienteBean.mostrarPessoa}">
+						<p:outputLabel value="CNPJ" for="cnpj" />
+					</h:panelGroup>
+				</h:panelGroup>
+				
+				<h:panelGroup id="panelPessoaInput">
+					<h:panelGroup rendered="#{clienteBean.mostrarPessoa}">
+						<p:inputMask id="cpf" size="20" maxlength="30"
+						value="#{clienteBean.cliente.documentoReceitaFederal}" mask="9999999999-9"/>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{!clienteBean.mostrarPessoa}">
+						<p:inputMask id="cnpj" size="20" maxlength="30"
+						value="#{clienteBean.cliente.documentoReceitaFederal}" mask="99.999.999./9999-99"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="40" maxlength="60"
 					value="#{clienteBean.cliente.email}" />
