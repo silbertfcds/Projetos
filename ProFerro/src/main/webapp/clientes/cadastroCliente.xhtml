@@ -85,27 +85,27 @@
 					<h:panelGrid  id="painelEndereco" columns="2">
 						<p:outputLabel value="Logradouro" />
 						<p:inputText size="35" 
-							value="#{clienteBean.endereco.logradouro}" onkeyup="validar(this,'text');"/>
+							value="#{clienteBean.novoEndereco.logradouro}" onkeyup="validar(this,'text');"/>
 
 						<p:outputLabel value="Número" />
 						<p:inputText size="5"  
-							value="#{clienteBean.endereco.numero}" onkeyup="validar(this,'num');"/>
+							value="#{clienteBean.novoEndereco.numero}" onkeyup="validar(this,'num');"/>
 
 						<p:outputLabel value="Complemento" />
 						<p:inputText 
-							value="#{clienteBean.endereco.complemento}"/>
+							value="#{clienteBean.novoEndereco.complemento}"/>
 
 						<p:outputLabel value="CEP" />
-						<p:inputMask value="#{clienteBean.endereco.cep}" mask="99999-999"/>
+						<p:inputMask value="#{clienteBean.novoEndereco.cep}" mask="99999-999"/>
 
 						<p:outputLabel value="Cidade" />
 						<h:panelGroup>
 							<p:inputText 
-								value="#{clienteBean.endereco.cidade}" onkeyup="validar(this,'text');"/>
+								value="#{clienteBean.novoEndereco.cidade}" onkeyup="validar(this,'text');"/>
 
 							<p:outputLabel value="UF" style="margin-left: 20px" />
 							<p:inputText  size="2" 
-								value="#{clienteBean.endereco.uf}" onkeyup="validar(this,'text');"/>
+								value="#{clienteBean.novoEndereco.uf}" onkeyup="validar(this,'text');"/>
 						</h:panelGroup>
 						<p:spacer />
 						<p:commandButton value="Incluir" style="margin-top: 20px" 
@@ -123,11 +123,11 @@
 
 					<h:panelGrid  id="painelTelefone" columns="2">
 						<p:outputLabel value="Número:  " />
-						<p:inputMask value="#{clienteBean.telefone.numero}" mask="(999) 9999-9999"/>
+						<p:inputMask value="#{clienteBean.novoTelefone.numero}" mask="(999) 9999-9999"/>
 						<p:outputLabel value="Tipo:"/>
 						<h:panelGroup>
 							<p:selectOneRadio id="tipoTelefone" styleClass="meu-radio" required="true"
-								value="#{clienteBean.telefone.tipoTelefone}">
+								value="#{clienteBean.novoTelefone.tipoTelefone}">
 								<f:selectItems value="#{clienteBean.tiposTelefones}"
 									var="tipoTelefone" itemValue="#{tipoTelefone}"
 									itemLabel="#{tipoTelefone.descricao}" />
@@ -159,9 +159,9 @@
 				</p:column>
 				<p:column style="text-align: center; width: 4%">
 					<p:commandButton icon="ui-icon-trash" title="Excluir" 
-						oncomplete="PF('confirmacaoTelefone').show()" >
+						 process="@this" oncomplete="PF('confirmacaoTelefone').show()" >
 						<f:setPropertyActionListener value="#{telefone}" 
-							target="#{clienteBean.telefone}"  />
+							target="#{clienteBean.removeTelefone}"  />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -194,9 +194,9 @@
 				</p:column>
 				<p:column style="text-align: center; width: 8%">
 					<p:commandButton icon="ui-icon-trash" title="Excluir" 
-						oncomplete="PF('confirmacao').show()" >
+						process="@this" oncomplete="PF('confirmacao').show()" >
 						<f:setPropertyActionListener value="#{endereco}" 
-							target="#{clienteBean.endereco}"  />
+							target="#{clienteBean.removeEndereco}"  />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

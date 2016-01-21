@@ -21,9 +21,9 @@
 		</p:column>
 		<p:column style="text-align: center; width: 3%">
 			<p:commandButton icon="ui-icon-trash" title="Excluir"
-				oncomplete="PF('confirmacaoItem').show()">
+				process="@this" oncomplete="PF('confirmacaoItem').show()">
 				<f:setPropertyActionListener value="#{item}"
-					target="#{orcamentoBean.item}" />
+					target="#{orcamentoBean.removeItem}" />
 			</p:commandButton>
 			
 		</p:column>

@@ -37,7 +37,9 @@ public class OrcamentoBean implements Serializable {
 	@OrcamentoEdicao
 	private Orcamento orcamento;
 	
-	private ItemOrcamento item;
+	private ItemOrcamento novoItem;
+	
+	private ItemOrcamento removeItem;
 	
 	@Inject
 	private FacesContext facesContext;
@@ -89,25 +91,20 @@ public class OrcamentoBean implements Serializable {
 	
 	public void limpar() {
 		orcamento = new Orcamento();
-		item = new ItemOrcamento();
+		novoItem = new ItemOrcamento();
 	}
 	
 	public void adicionarItem(){
-		if(item!=null){
-			orcamento.getItens().add(item);
-			item.setOrcamento(orcamento);
-			orcamento.recalcularValorTotal();
-			item = new ItemOrcamento();
-		}else{
-			item = new ItemOrcamento();
-		}
+		orcamento.getItens().add(novoItem);
+		novoItem.setOrcamento(orcamento);
+		orcamento.recalcularValorTotal();
+		novoItem = new ItemOrcamento();
 	}
 	
 	public void excluirItem(){
-		if(item!=null){
-			orcamento.getItens().remove(item);
-			orcamento.recalcularValorTotal();
-		}
+		orcamento.getItens().remove(removeItem);
+		orcamento.recalcularValorTotal();
+		
 	}
 	
 	public void recalcularOrcamento() {
@@ -128,14 +125,22 @@ public class OrcamentoBean implements Serializable {
 		this.orcamento = orcamento;
 	}
 
-	public ItemOrcamento getItem() {
-		return item;
+	public ItemOrcamento getNovoItem() {
+		return novoItem;
 	}
 
-	public void setItem(ItemOrcamento item) {
-		this.item = item;
+	public void setNovoItem(ItemOrcamento novoItem) {
+		this.novoItem = novoItem;
 	}
-	
+
+	public ItemOrcamento getRemoveItem() {
+		return removeItem;
+	}
+
+	public void setRemoveItem(ItemOrcamento removeItem) {
+		this.removeItem = removeItem;
+	}
+
 	public boolean isEditando() {
 		boolean resultado = false;
 		if (this.orcamento != null) {

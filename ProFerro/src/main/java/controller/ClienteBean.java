@@ -28,9 +28,13 @@ public class ClienteBean implements Serializable {
 	@ClienteEdicao
 	private Cliente cliente;
 	
-	private Endereco endereco;
+	private Endereco novoEndereco;
 	
-	private Telefone telefone;
+	private Endereco removeEndereco;
+	
+	private Telefone novoTelefone;
+	
+	private Telefone removeTelefone;
 
 	private boolean mostrarPessoa = false;
 	
@@ -52,37 +56,26 @@ public class ClienteBean implements Serializable {
 		}
 	}
 	public void adicionarEndereco(){	
-		if(endereco!=null){
-			cliente.getEnderecos().add(endereco);
-			endereco.setCliente(cliente);
-			endereco = new Endereco();
-		}else{
-			endereco = new Endereco();
-		}
+		cliente.getEnderecos().add(novoEndereco);
+		novoEndereco.setCliente(cliente);
+		novoEndereco = new Endereco();
 	}
 	
 	public void adicionarTelefone(){
-		if(telefone!=null){
-			cliente.getTelefones().add(telefone);
-			telefone.setCliente(cliente);
-			telefone = new Telefone();
-		}else{
-			telefone = new Telefone();
-		}
+		cliente.getTelefones().add(novoTelefone);
+		novoTelefone.setCliente(cliente);
+		novoTelefone = new Telefone();
+		
 	}
 	
 	public void excluirEndereco(){
-		if(endereco!=null){
-			cliente.getEnderecos().remove(endereco);
-			//endereco = new Endereco();
-		}
+		this.cliente.getEnderecos().remove(removeEndereco);
 		
 	}
 	
 	public void excluirTelefone(){
-		if(telefone!=null){
-			cliente.getTelefones().remove(telefone);
-		}
+		this.cliente.getTelefones().remove(removeTelefone);
+		
 	}
 	
 	public Cliente getCliente() {
@@ -99,14 +92,6 @@ public class ClienteBean implements Serializable {
 		}
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	
 	public boolean isEditando() {
         boolean resultado = false;
         if (this.cliente != null) {
@@ -125,16 +110,24 @@ public class ClienteBean implements Serializable {
 	
 	private void limpar() {
 		cliente = new Cliente();
-		endereco = new Endereco();
-		telefone = new Telefone();
+		novoEndereco = new Endereco();
+		novoTelefone = new Telefone();
 	}
 	
-	public Telefone getTelefone() {
-		return telefone;
+	public Telefone getNovoTelefone() {
+		return novoTelefone;
 	}
 
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
+	public void setNovoTelefone(Telefone novoTelefone) {
+		this.novoTelefone = novoTelefone;
+	}
+
+	public Telefone getRemoveTelefone() {
+		return removeTelefone;
+	}
+
+	public void setRemoveTelefone(Telefone removeTelefone) {
+		this.removeTelefone = removeTelefone;
 	}
 
 	public boolean isMostrarPessoa() {
@@ -143,6 +136,22 @@ public class ClienteBean implements Serializable {
 
 	public void setMostrarPessoa(boolean mostrarPessoa) {
 		this.mostrarPessoa = mostrarPessoa;
+	}
+
+	public Endereco getNovoEndereco() {
+		return novoEndereco;
+	}
+
+	public void setNovoEndereco(Endereco novoEndereco) {
+		this.novoEndereco = novoEndereco;
+	}
+
+	public Endereco getRemoveEndereco() {
+		return removeEndereco;
+	}
+
+	public void setRemoveEndereco(Endereco removeEndereco) {
+		this.removeEndereco = removeEndereco;
 	}
 	
 }
