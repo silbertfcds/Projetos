@@ -15,7 +15,7 @@
 
 		<h:form id="frmCliente">
 			<h1>#{clienteBean.editando ? 'Edição de cliente' : 'Novo Cliente'}</h1>
-			<p:messages autoUpdate="true" closable="true" />
+			<p:growl id="growlCliente" showDetail="true" sticky="false" />  
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
@@ -37,7 +37,7 @@
 
 				<p:outputLabel value="Tipo" for="tipo" />
 				<h:panelGroup>
-					<p:selectOneRadio id="tipo" styleClass="meu-radio" required="true"
+					<p:selectOneRadio id="tipo" styleClass="meu-radio"
 						value="#{clienteBean.cliente.tipoPessoa}">
 						<f:selectItems value="#{clienteBean.tiposPessoas}"
 							var="tipoPessoa" itemValue="#{tipoPessoa}"
@@ -110,7 +110,7 @@
 						<p:spacer />
 						<p:commandButton value="Incluir" style="margin-top: 20px" 
 							action="#{clienteBean.adicionarEndereco}" 
-							process="painelEndereco" update=":frmCliente:enderecosTable" ajax="true"/>
+							process="painelEndereco" update=":frmCliente:enderecosTable, :frmCliente:growlCliente" ajax="true"/>
 
 					</h:panelGrid>
 
@@ -122,11 +122,11 @@
 				<h:panelGroup id="inclusaoPanelTelefone">
 
 					<h:panelGrid  id="painelTelefone" columns="2">
-						<p:outputLabel value="Número:  " />
-						<p:inputMask value="#{clienteBean.novoTelefone.numero}" mask="(999) 9999-9999"/>
+						<p:outputLabel value="Número:  " for="Número"/>
+						<p:inputMask id="Número" value="#{clienteBean.novoTelefone.numero}" mask="(999) 9999-9999"/>
 						<p:outputLabel value="Tipo:"/>
 						<h:panelGroup>
-							<p:selectOneRadio id="tipoTelefone" styleClass="meu-radio" required="true"
+							<p:selectOneRadio id="tipoTelefone" styleClass="meu-radio"
 								value="#{clienteBean.novoTelefone.tipoTelefone}">
 								<f:selectItems value="#{clienteBean.tiposTelefones}"
 									var="tipoTelefone" itemValue="#{tipoTelefone}"
@@ -137,7 +137,7 @@
 						<p:spacer />
 						<p:commandButton value="Incluir" style="margin-top: 20px" 
 							action="#{clienteBean.adicionarTelefone}" 
-							process="painelTelefone" update=":frmCliente:telefonesTable" ajax="true"/>
+							process="painelTelefone" update=":frmCliente:telefonesTable, :frmCliente:growlCliente" ajax="true"/>
 					</h:panelGrid>
 
 				</h:panelGroup>
@@ -209,7 +209,7 @@
 					onclick="PF('confirmacao').hide(); return false;" />
 				<p:commandButton value="Sim"
 					oncomplete="PF('confirmacao').hide(); return false;" 
-					update=":frmCliente:enderecosTable"
+					update=":frmCliente:enderecosTable, :frmCliente:growlCliente"
 					process="@this" action="#{clienteBean.excluirEndereco}"/>
 			</p:confirmDialog>
 			
@@ -220,7 +220,7 @@
 					onclick="PF('confirmacaoTelefone').hide(); return false;" />
 				<p:commandButton value="Sim"
 					oncomplete="PF('confirmacaoTelefone').hide(); return false;" 
-					update=":frmCliente:telefonesTable"
+					update=":frmCliente:telefonesTable, :frmCliente:growlCliente"
 					process="@this" action="#{clienteBean.excluirTelefone}"/>
 			</p:confirmDialog>
 

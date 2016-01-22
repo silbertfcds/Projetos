@@ -16,7 +16,7 @@
     	
 		<h:form id="frmGrupo">
 			<h1>#{usuarioBean.editando ? 'Edição de usuário' : 'Novo Usuário'}</h1>
-			<p:messages autoUpdate="true" closable="true"/>
+			<p:growl id="growlUsuario" showDetail="true" sticky="false" />  
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
@@ -43,15 +43,14 @@
 				<p:outputLabel value="Senha" for="senha" />
 				<p:password id="senha" value="#{usuarioBean.usuario.senha}" />
 				
-				<p:selectOneMenu id="grupo" value="#{usuarioBean.novoGrupo}"
-					required="true" requiredMessage="Grupo deve ser informado">
+				<p:selectOneMenu id="grupo" value="#{usuarioBean.novoGrupo}">
 					<f:selectItem itemLabel="Selecione o grupo" />
 					<f:selectItems value="#{usuarioBean.gruposRaizes}"
 						var="grupo" itemValue="#{grupo}"
 						itemLabel="#{grupo.descricao}" />
 				</p:selectOneMenu>
 				<p:commandButton value="Adicionar grupo" action="#{usuarioBean.adicionarGrupo}"
-					process="usuarioPanel" update=":frmGrupo:grupoTable" icon="ui-icon-circle-plus"/>
+					process="usuarioPanel" update=":frmGrupo:grupoTable, :frmGrupo:growlUsuario" icon="ui-icon-circle-plus"/>
 
 			</p:panelGrid>
 			
@@ -83,7 +82,7 @@
 					onclick="PF('confirmacao').hide(); return false;" />
 				<p:commandButton value="Sim"
 					oncomplete="PF('confirmacao').hide(); return false;"  action="#{usuarioBean.removerGrupo}"
-						update=":frmGrupo:grupoTable" process="@this"/>
+						update=":frmGrupo:grupoTable, :frmGrupo:growlUsuario" process="@this"/>
 			</p:confirmDialog>
 			
 

@@ -37,7 +37,7 @@ public class Orcamento implements Serializable {
 	private Date criacao;
 	@NotNull
 	@Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal= BigDecimal.ZERO;
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name ="cliente_id", nullable = false)
@@ -138,6 +138,11 @@ public class Orcamento implements Serializable {
 	@Transient
 	public boolean isNovo(){
 		return getId() ==null;
+	}
+	
+	@Transient
+	public boolean isEditando(){
+		return !isNovo();
 	}
 	
 	@Transient

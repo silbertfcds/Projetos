@@ -53,14 +53,16 @@ public class UsuarioBean implements Serializable {
 	public void adicionarGrupo(){
 		
 		if(usuario.getGrupos().contains(novoGrupo)){
-			FacesUtil.addErrorMessage("Grupo já adicionado.");
+			FacesUtil.addErrorMessage("Grupo já foi adicionado.");
 		}else{
 			usuario.getGrupos().add(novoGrupo);
+			FacesUtil.addInfoMessage("Grupo adicionado.");
 		}
 		
 	}
 	public void removerGrupo() { 
         this.usuario.getGrupos().remove(removeGrupo);
+        FacesUtil.addInfoMessage("Grupo removido.");
     }
 	
 	private void limpar() {

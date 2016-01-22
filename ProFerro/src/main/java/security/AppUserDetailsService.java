@@ -16,7 +16,7 @@ import repository.Usuarios;
 import util.CDIServiceLocator;
 
 /*
- *Bean de serviço do Srping Security
+ *Bean de serviço do Spring Security
  */
 public class AppUserDetailsService implements UserDetailsService {
 

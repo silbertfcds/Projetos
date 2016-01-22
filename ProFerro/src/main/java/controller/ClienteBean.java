@@ -55,27 +55,37 @@ public class ClienteBean implements Serializable {
 			mostrarPessoa = false;
 		}
 	}
-	public void adicionarEndereco(){	
-		cliente.getEnderecos().add(novoEndereco);
-		novoEndereco.setCliente(cliente);
-		novoEndereco = new Endereco();
+	public void adicionarEndereco(){
+		if(!novoEndereco.getLogradouro().equals("")){
+			cliente.getEnderecos().add(novoEndereco);
+			novoEndereco.setCliente(cliente);
+			novoEndereco = new Endereco();
+			FacesUtil.addInfoMessage("Endereço adicionado com sucesso");
+		}else{
+			FacesUtil.addErrorMessage("Campo logradouro vazio");
+		}
 	}
 	
 	public void adicionarTelefone(){
-		cliente.getTelefones().add(novoTelefone);
-		novoTelefone.setCliente(cliente);
-		novoTelefone = new Telefone();
+		if(!novoTelefone.getNumero().equals("") && novoTelefone.getTipoTelefone()!=null){
+			cliente.getTelefones().add(novoTelefone);
+			novoTelefone.setCliente(cliente);
+			novoTelefone = new Telefone();
+			FacesUtil.addInfoMessage("Telefone adicionado com sucesso");
+		}else{
+			FacesUtil.addErrorMessage("Preencha todos os campos");
+		}
 		
 	}
 	
 	public void excluirEndereco(){
 		this.cliente.getEnderecos().remove(removeEndereco);
-		
+		FacesUtil.addInfoMessage("Endereço removido!");
 	}
 	
 	public void excluirTelefone(){
 		this.cliente.getTelefones().remove(removeTelefone);
-		
+		FacesUtil.addInfoMessage("Telefone removido!");
 	}
 	
 	public Cliente getCliente() {

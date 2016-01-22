@@ -7,24 +7,23 @@
 	<p:dialog header="Inclusão de item" id="dialogItem"
 		widgetVar="adicionarItemDialog" modal="true" resizable="false">
 		<h:panelGroup id="inclusaoPanelItem">
-			<p:messages autoUpdate="true" closable="true" />
+			<p:growl id="growlItem" showDetail="true" sticky="false" />  
 			<h:panelGrid id="painelItem" columns="2">
 				<p:outputLabel value="Nome do item:  " for="nomeItem"/>
 				<p:inputText id="nomeItem" size="20" value="#{orcamentoBean.novoItem.descricao}" />
 				
-				<p:outputLabel value="Quantidade  " />
-				<p:inputText size="20" value="#{orcamentoBean.novoItem.quantidade}" onkeyup="validar(this,'num');"/>
+				<p:outputLabel value="Quantidade  " for="quantidade" />
+				<p:inputText id="quantidade" size="20" value="#{orcamentoBean.novoItem.quantidade}" onkeyup="validar(this,'num');" />
 				
 				<p:outputLabel value="Valor unitário:  " for="valor" />
-				<p:inputText id="valor" size="20" value="#{orcamentoBean.novoItem.valorUnitario}" 
-					styleClass="moeda">
+				<p:inputText id="valor" size="20" value="#{orcamentoBean.novoItem.valorUnitario}"  styleClass="moeda">
 					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 				</p:inputText>
 
 				<p:spacer />
 				<p:commandButton value="Incluir" style="margin-top: 20px"
 					action="#{orcamentoBean.adicionarItem}" process="painelItem"
-					update=":frmCadastroOrcamento:tabView:itensTabela, :frmCadastroOrcamento:totalPedido" />
+					update=":frmCadastroOrcamento:tabView:itensTabela, :frmCadastroOrcamento:totalPedido, :frmCadastroOrcamento:growlItem" />
 			</h:panelGrid>
 
 		</h:panelGroup>
@@ -38,7 +37,7 @@
 		<p:commandButton value="Sim"
 			oncomplete="PF('confirmacaoItem').hide(); return false;"
 			process="@this"
-			action="#{orcamentoBean.excluirItem}" update=":frmCadastroOrcamento:tabView:itensTabela, :frmCadastroOrcamento:totalPedido" />
+			action="#{orcamentoBean.excluirItem}" update=":frmCadastroOrcamento:tabView:itensTabela, :frmCadastroOrcamento:totalPedido, frmCadastroOrcamento:growlItem" />
 	</p:confirmDialog>
 
 </ui:composition>

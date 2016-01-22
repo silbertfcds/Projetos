@@ -24,7 +24,7 @@ public class ItemOrcamento implements Serializable {
 	@Column(nullable = false, length = 3)
 	private Integer quantidade=1;
 	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
-	private BigDecimal valorUnitario;
+	private BigDecimal valorUnitario = BigDecimal.ZERO;
 	@Column(nullable = false, length = 150)
 	private String descricao;
 	@ManyToOne

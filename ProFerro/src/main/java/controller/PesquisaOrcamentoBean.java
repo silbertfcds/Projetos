@@ -11,6 +11,7 @@ import javax.inject.Named;
 import model.Orcamento;
 import repository.Orcamentos;
 import repository.filter.OrcamentoFilter;
+import util.jsf.FacesUtil;
 
 
 @Named
@@ -34,6 +35,10 @@ public class PesquisaOrcamentoBean implements Serializable {
 	
 	public void pesquisar(){
 		orcamentosFiltrados = orcamentos.filtrados(filtro);
+		
+		if(orcamentosFiltrados.size()==0){
+			FacesUtil.addErrorMessage("A busca não retornou nenhum item");
+		}
 	}
 	
 	public List<Orcamento> getOrcamentosFiltrados() {

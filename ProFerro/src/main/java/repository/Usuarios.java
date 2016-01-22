@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 
 import model.Usuario;
 
@@ -17,6 +18,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import repository.filter.UsuarioFilter;
+import service.NegocioException;
 import util.jpa.transactional;
 
 
@@ -40,9 +42,13 @@ public class Usuarios implements Serializable {
 	
 	@transactional
 	public void remover(Usuario usuario){
-		usuario = porId(usuario.getId());
-		manager.remove(usuario);
-		manager.flush();
+		try {
+			usuario = porId(usuario.getId());
+			manager.remove(usuario);
+			manager.flush();
+		} catch (PersistenceException e) {
+			throw new NegocioException("Usuário não pode ser excluído.");
+		}
 		
 	}
 	public Usuario porEmail(String email) {

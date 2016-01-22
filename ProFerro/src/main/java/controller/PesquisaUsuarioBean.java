@@ -35,6 +35,10 @@ public class PesquisaUsuarioBean {
 	
 	public void pesquisar() {
 		usuariosFiltrados = usuarios.filtrados(filtro);
+		
+		if(usuariosFiltrados.size()==0){
+			FacesUtil.addErrorMessage("A busca não retornou nenhum item");
+		}
 	}
 	
 	public UsuarioFilter getFiltro() {

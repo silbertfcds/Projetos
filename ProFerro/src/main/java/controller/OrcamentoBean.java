@@ -13,11 +13,12 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-
 import model.Cliente;
 import model.ItemOrcamento;
 import model.Orcamento;
+
+import org.hibernate.Session;
+
 import repository.Clientes;
 import service.OrcamentoService;
 import util.jsf.FacesUtil;
@@ -70,14 +71,13 @@ public class OrcamentoBean implements Serializable {
 		if (executor.isRelatorioGerado()) {
 			facesContext.responseComplete();
 		} else {
-			FacesUtil.addErrorMessage("A execução do relatório não retornou dados.");
+			FacesUtil.addErrorMessage("A execução do relatório não retornou dados");
 		}
 	}
 	
 	public void salvar(){
 		service.salvar(orcamento);
-		limpar();
-		FacesUtil.addInfoMessage("Orçamento salvo com sucesso!");
+		FacesUtil.addInfoMessage("Orçamento salvo com sucesso.");
 	}
 	
 	public void inicializar() {
@@ -95,16 +95,21 @@ public class OrcamentoBean implements Serializable {
 	}
 	
 	public void adicionarItem(){
-		orcamento.getItens().add(novoItem);
-		novoItem.setOrcamento(orcamento);
-		orcamento.recalcularValorTotal();
-		novoItem = new ItemOrcamento();
+		if(!novoItem.getDescricao().equals("")){
+			orcamento.getItens().add(novoItem);
+			novoItem.setOrcamento(orcamento);
+			orcamento.recalcularValorTotal();
+			novoItem = new ItemOrcamento();
+			FacesUtil.addInfoMessage("Item adicionado.");
+		}else{
+			FacesUtil.addErrorMessage("Campo Vazio");
+		}
 	}
 	
 	public void excluirItem(){
 		orcamento.getItens().remove(removeItem);
 		orcamento.recalcularValorTotal();
-		
+		FacesUtil.addInfoMessage("Item excluído");
 	}
 	
 	public void recalcularOrcamento() {
@@ -141,11 +146,4 @@ public class OrcamentoBean implements Serializable {
 		this.removeItem = removeItem;
 	}
 
-	public boolean isEditando() {
-		boolean resultado = false;
-		if (this.orcamento != null) {
-			resultado = this.orcamento.getId() != null;
-		}
-		return resultado;
-	}
 }

@@ -8,10 +8,12 @@
 		<p:outputLabel value="Descrição" for="descricao"/>
 		<p:inputText id="descricao" size="40" maxlength="80" value="#{orcamentoBean.orcamento.descricao}" />
 		
-		<p:outputLabel value="Data de criação"/>
-        <h:outputText value="#{orcamentoBean.orcamento.criacao}">
+		<p:outputLabel value="Data de criação" rendered="#{orcamentoBean.orcamento.editando}"/>
+		<p:outputLabel rendered="#{orcamentoBean.orcamento.novo}"/>
+        <h:outputText value="#{orcamentoBean.orcamento.criacao}" rendered="#{orcamentoBean.orcamento.editando}">
         	<f:convertDateTime pattern="dd/MM/yyyy"/>
         </h:outputText>
+        <p:outputLabel  rendered="#{orcamentoBean.orcamento.novo}"/>
         
         <p:outputLabel value="Cliente" for="cliente"/>
         <p:autoComplete id="cliente" size="40" dropdown="true" 

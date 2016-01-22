@@ -7,12 +7,12 @@
 	<p:toolbar style="margin-top: 20px">
   		<p:toolbarGroup>
   			<p:button value="Novo" outcome="/orcamentos/cadastroOrcamento" icon="ui-icon-document"/>
-  			<p:commandButton value="Salvar" action="#{orcamentoBean.salvar}" icon="ui-icon-disk"/>
+  			<p:commandButton value="Salvar" action="#{orcamentoBean.salvar}" icon="ui-icon-disk" update="@form"/>
   		</p:toolbarGroup>
   		
   		<p:toolbarGroup align="right">
   			<p:commandButton value="Adicionar itens" onclick="PF('adicionarItemDialog').show(); return false"  icon="ui-icon-circle-plus"/>
-  			<p:commandButton value="Enviar por e-mail" action="#{envioOrcamentoEmailBean.enviar}" icon="ui-icon-mail-closed"
+  			<p:commandButton id="enviarEmail" value="Enviar por e-mail" action="#{envioOrcamentoEmailBean.enviar}" icon="ui-icon-mail-closed"
   				process="@this" disabled="#{orcamentoBean.orcamento.novo}"/>
   			
   			<p:separator/>

@@ -10,7 +10,7 @@
     <ui:define name="corpo">
     	<h:form id="frmCliente">
 	    	<h1>Pesquisa de clientes</h1>
-	    	<p:messages autoUpdate="true" closable="true" />
+	    	<p:growl id="growlPesquisaCliente" showDetail="true" sticky="false" /> 
 	    	<p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Pesquisar" action="#{pesquisaClienteBean.pesquisar}"
@@ -65,7 +65,7 @@
 					onclick="PF('confirmacao').hide(); return false;" />
 				<p:commandButton value="Sim"
 					oncomplete="PF('confirmacao').hide(); return false;" action="#{pesquisaClienteBean.excluir}"
-					update=":frmCliente:clientesTable" process="@this"/>
+					update=":frmCliente:clientesTable, :frmCliente:growlPesquisaCliente" process="@this"/>
 			</p:confirmDialog>
 
 		</h:form>

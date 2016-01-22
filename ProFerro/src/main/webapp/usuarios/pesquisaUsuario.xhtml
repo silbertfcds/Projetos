@@ -10,7 +10,7 @@
     <ui:define name="corpo">
     	<h:form id="frmUsuario">
 	    	<h1>Pesquisa de usuários</h1>
-	    	<p:messages autoUpdate="true" closable="true"/>
+	    	<p:growl id="growlPesquisaUsuario" showDetail="true" sticky="false" />  
 	    	<p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Pesquisar" action="#{pesquisaUsuarioBean.pesquisar}" icon="ui-icon-search"
@@ -57,7 +57,7 @@
 				widgetVar="confirmacao">
 				<p:button value="Não"
 					onclick="PF('confirmacao').hide(); return false;" />
-				<p:commandButton value="Sim" action="#{pesquisaUsuarioBean.excluir}" update=":frmUsuario:pedidosTable"
+				<p:commandButton value="Sim" action="#{pesquisaUsuarioBean.excluir}" update=":frmUsuario:pedidosTable,:frmUsuario:growlPesquisaUsuario"
 					process="@this" oncomplete="PF('confirmacao').hide(); return false;" />
 			</p:confirmDialog>
 	    	

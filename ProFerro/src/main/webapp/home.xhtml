@@ -23,21 +23,22 @@
 
 			<p:dialog header="Evento" id="dialogEvento"
 				widgetVar="adicionarEventoDialog" modal="true" resizable="false">
+				<p:growl id="growlEvento" showDetail="true" sticky="false" />  
 				<h:panelGroup id="inclusaoPanelEvento">
 					<h:panelGrid id="painelEvento" columns="2">
-						<p:outputLabel value="Titulo:  " />
-						<p:inputText value="#{scheduleView.evento.titulo}"/>
+						<p:outputLabel value="Titulo:  " for="titulo" />
+						<p:inputText id="titulo" value="#{scheduleView.evento.titulo}"/>
 						
-						<p:outputLabel value="De:  " />
-						<p:calendar id="datetimeDe" value="#{scheduleView.evento.dataDe}" pattern="dd/MM/yyyy HH:mm:ss" showOn="button"/>
+						<p:outputLabel value="De:  "  for="dataDe"/>
+						<p:calendar id="dataDe" value="#{scheduleView.evento.dataDe}" pattern="dd/MM/yyyy HH:mm:ss" showOn="button" />
 	    					
- 						<p:outputLabel value="Até:  " />
-    					<p:calendar id="datetimeAte" value="#{scheduleView.evento.dataAte}" pattern="dd/MM/yyyy HH:mm:ss" showOn="button"/>
+ 						<p:outputLabel value="Até:  " for="dataAte" />
+    					<p:calendar id="dataAte" value="#{scheduleView.evento.dataAte}" pattern="dd/MM/yyyy HH:mm:ss" showOn="button" />
 	    					
 						<p:spacer />
 						<p:commandButton value="Incluir" style="margin-top: 20px"
 							action="#{scheduleView.salvar}"
-							process="painelEvento" update=":frmEvento:calendario" />
+							process="painelEvento" update=":frmEvento:calendario, :frmEvento:growlEvento"/>
 					</h:panelGrid>
 
 				</h:panelGroup>

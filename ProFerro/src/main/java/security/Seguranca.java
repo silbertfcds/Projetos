@@ -6,6 +6,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import model.Grupo;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 @Named
@@ -28,6 +31,22 @@ public class Seguranca {
 		return nome;
 	}
 
+	/**
+	 * Verifica se o usuário logado é do grupo Administrador
+	 * @return Boolean
+	 */
+	public boolean isAdministrador(){
+		
+		UsuarioSistema usuarioLogado = getUsuarioLogado();
+		
+		for (Grupo u : usuarioLogado.getUsuario().getGrupos()) {
+			if(u.getDescricao().equals("ADMINISTRADOR")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Produces
 	@UsuarioLogado
 	public UsuarioSistema getUsuarioLogado() {

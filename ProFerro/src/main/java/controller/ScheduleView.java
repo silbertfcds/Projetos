@@ -17,6 +17,7 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import repository.Eventos;
+import util.jsf.FacesUtil;
  
 @Named
 @ViewScoped
@@ -48,9 +49,15 @@ public class ScheduleView implements Serializable {
     }
     
     public void salvar(){
-    	evento = eventos.guardar(evento);
-        event = new DefaultScheduleEvent(evento.getTitulo(), evento.getDataDe(), evento.getDataAte());
-        eventModel.addEvent(event);
+    	if(!evento.getTitulo().equals("")&& evento.getDataDe()!=null && evento.getDataAte()!=null){
+    		evento = eventos.guardar(evento);
+    		event = new DefaultScheduleEvent(evento.getTitulo(), evento.getDataDe(), evento.getDataAte());
+    		eventModel.addEvent(event);
+    		evento= new Evento();
+    		FacesUtil.addInfoMessage("Evento adicionado");
+    	}else{
+    		FacesUtil.addErrorMessage("Preencha todos os campos");
+    	}
         //event = new DefaultScheduleEvent();
     }
     

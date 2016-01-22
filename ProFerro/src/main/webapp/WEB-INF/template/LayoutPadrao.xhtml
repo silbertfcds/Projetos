@@ -38,7 +38,7 @@
  					<p:menubar styleClass="menu-sistema">
  						<p:submenu label="Cadastros">
  							<p:menuitem value="Clientes" outcome="/clientes/cadastroCliente" icon="ui-icon-person"/>
- 							<p:menuitem value="Usuários" outcome="/usuarios/cadastroUsuario" icon="ui-icon-person"/>
+ 							<p:menuitem value="Usuários" outcome="/usuarios/cadastroUsuario" icon="ui-icon-person" rendered="#{seguranca.administrador}"/>
  							<p:separator/>
  						</p:submenu>
  						

@@ -43,7 +43,7 @@ public class Clientes implements Serializable{
 			manager.remove(cliente);
 			manager.flush();
 		}catch(PersistenceException e){
-			throw new NegocioException("Cliente não pode ser excluído.");
+			throw new NegocioException("Cliente não pode ser excluído, pois está ligado a um orcamento criado.");
 		}
 	}
 	

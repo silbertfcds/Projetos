@@ -11,12 +11,11 @@
 		<f:event listener="#{orcamentoBean.inicializar}" type="preRenderView" />
 	</f:metadata>
 
-	<ui:define name="titulo">#{orcamentoBean.editando ? 'Edição de orçamento' : 'Novo Orçamento'}</ui:define>
+	<ui:define name="titulo">#{orcamentoBean.orcamento.editando ? 'Edição de orçamento' : 'Novo Orçamento'}</ui:define>
 	
     <ui:define name="corpo">
     	<h:form id="frmCadastroOrcamento">
-	    	<h1>Novo Orçamento</h1>
-	    	<p:messages autoUpdate="true" closable="true"/>
+	    	<h1>#{orcamentoBean.orcamento.editando ? 'Edição de orçamento' : 'Novo Orçamento'}</h1>
 	    	
 	    	<ui:include src="/WEB-INF/template/orcamentos/botoesOrcamento.xhtml" />
 	    	
