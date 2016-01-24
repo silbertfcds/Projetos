@@ -26,7 +26,7 @@ public class OrcamentoService implements Serializable {
 		orcamento.recalcularValorTotal();
 		
 		if(orcamento.getItens().isEmpty()){
-			throw new NegocioException("O pedido deve possuir pelo menos um item.");
+			throw new NegocioException("O orçamento deve possuir pelo menos um item.");
 		}
 		
 		if(orcamento.valorTotalNegativo()){

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +96,8 @@ public class OrcamentoBean implements Serializable {
 	}
 	
 	public void adicionarItem(){
-		if(!novoItem.getDescricao().equals("")){
+		double valor = novoItem.getValorUnitario().doubleValue();
+		if(!novoItem.getDescricao().equals("")&& valor!=0.00 && novoItem.getQuantidade()!=0){
 			orcamento.getItens().add(novoItem);
 			novoItem.setOrcamento(orcamento);
 			orcamento.recalcularValorTotal();
