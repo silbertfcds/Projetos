@@ -56,8 +56,5 @@ public class PesquisaOrcamentoBean implements Serializable {
 	public void setFiltro(OrcamentoFilter filtro) {
 		this.filtro = filtro;
 	}
-	
-	
-	
 
 }

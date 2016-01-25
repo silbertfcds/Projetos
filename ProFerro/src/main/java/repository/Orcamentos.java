@@ -51,8 +51,7 @@ public class Orcamentos implements Serializable{
 			// acessamos o nome do cliente associado ao pedido pelo alias "c", criado anteriormente
 			criteria.add(Restrictions.ilike("c.nome", filtro.getNomeCliente(), MatchMode.ANYWHERE));
 		}
-		
-		return criteria.addOrder(Order.asc("id")).list();
+		return criteria.addOrder(Order.desc("criacao")).list();
 	}
 
 	public Orcamento porId(Long id) {

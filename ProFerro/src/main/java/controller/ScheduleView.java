@@ -65,7 +65,7 @@ public class ScheduleView implements Serializable {
      * Metódo responsável por listar os eventos cadastrados 
      */
     public void listarEventos(){
-    	 listaEventos = eventos.listar();
+    	listaEventos = eventos.listar();
      	
      	for (Evento evento : listaEventos) {
      		eventModel.addEvent(new DefaultScheduleEvent(evento.getTitulo(), evento.getDataDe(), evento.getDataAte()));

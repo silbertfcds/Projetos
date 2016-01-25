@@ -158,14 +158,6 @@ WHERE
 				<text><![CDATA[EQUIPAMENTOS C/ INSTALAÇÃO ]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="35038c40-0af3-4b69-b9f1-8b7a6e80fa3a" x="230" y="40" width="125" height="20"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Arial"/>
-					<paragraph leftIndent="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{doc_receita_federal}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement uuid="030c7170-a5b7-4144-aa19-081de4253d1c" x="52" y="40" width="100" height="20"/>
 				<textElement>
 					<font fontName="Arial"/>
@@ -194,13 +186,6 @@ WHERE
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[EMAIL:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="d09a5c99-4589-4708-b515-18c46dd29a44" x="174" y="40" width="56" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CPF/CNPJ:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

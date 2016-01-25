@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +78,7 @@ public class OrcamentoBean implements Serializable {
 	public void salvar(){
 		service.salvar(orcamento);
 		FacesUtil.addInfoMessage("Orçamento salvo com sucesso.");
+		limpar();
 	}
 	
 	public void inicializar() {
@@ -103,9 +103,10 @@ public class OrcamentoBean implements Serializable {
 			orcamento.recalcularValorTotal();
 			novoItem = new ItemOrcamento();
 			FacesUtil.addInfoMessage("Item adicionado.");
-		}else{
-			FacesUtil.addErrorMessage("Campo Vazio");
 		}
+		else
+			FacesUtil.addErrorMessage("Preencha os campos corretamente.");
+		
 	}
 	
 	public void excluirItem(){
