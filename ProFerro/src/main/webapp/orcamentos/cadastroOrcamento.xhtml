@@ -15,6 +15,7 @@
 	
     <ui:define name="corpo">
     	<h:form id="frmCadastroOrcamento">
+    		<p:growl id="growlOrcamento" showDetail="true" sticky="false" />  
 	    	<h1>#{orcamentoBean.orcamento.editando ? 'Edição de orçamento' : 'Novo Orçamento'}</h1>
 	    	
 	    	<ui:include src="/WEB-INF/template/orcamentos/botoesOrcamento.xhtml" />

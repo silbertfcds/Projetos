@@ -13,7 +13,7 @@
   		<p:toolbarGroup align="right">
   			<p:commandButton value="Adicionar itens" onclick="PF('adicionarItemDialog').show(); return false"  icon="ui-icon-circle-plus"/>
   			<p:commandButton id="enviarEmail" value="Enviar por e-mail" action="#{envioOrcamentoEmailBean.enviar}" icon="ui-icon-mail-closed"
-  				process="@this" disabled="#{orcamentoBean.orcamento.novo}"/>
+  				process="@this" disabled="#{orcamentoBean.orcamento.novo}" update="@form"/>
   			
   			<p:separator/>
   		
