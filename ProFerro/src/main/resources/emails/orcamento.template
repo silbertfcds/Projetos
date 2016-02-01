@@ -1,9 +1,9 @@
 <html>
     <body>
-    	<h1 style="text-align:center;"><b>OrÃ§amento</b></h1>
+    	<h1 style="text-align:center;"><b>Orçamento</b></h1>
         <table>
         	<tr>
-                <td>DescriÃ§Ã£o:</td>
+                <td>Descrição:</td>
                 <td>$orcamento.descricao</td>
             </tr>
             <tr>
@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td><b>Valor total:</b></td>
-                <td><b>$numberTool.format("Â¤ #0.00", $orcamento.valorTotal, $locale)</b></td>
+                <td><b>$numberTool.format("¤ #0.00", $orcamento.valorTotal, $locale)</b></td>
             </tr>
         </table>
         
@@ -20,7 +20,7 @@
         <table border="1" cellspacing="0" cellpadding="3">
             <tr>
                 <th>Item</th>
-                <th>Valor unitÃ¡rio</th>
+                <th>Valor unitário</th>
                 <th>Quantidade</th>
                 <th>Valor total</th>
             </tr>
@@ -28,9 +28,9 @@
             	#if ($item.id)
 	            <tr>
 	                <td>$item.descricao</td>
-	                <td>$numberTool.format("Â¤ #0.00", $item.valorUnitario, $locale)</td>
+	                <td>$numberTool.format("¤ #0.00", $item.valorUnitario, $locale)</td>
 	                <td>$item.quantidade</td>
-	                <td>$numberTool.format("Â¤ #0.00", $item.valorTotal, $locale)</td>
+	                <td>$numberTool.format("¤ #0.00", $item.valorTotal, $locale)</td>
 	            </tr>
 	            #end
             #end
@@ -42,7 +42,7 @@
 	            	<td>
 	            	</td>
 	            	<td>
-	            		 <b>$numberTool.format("Â¤ #0.00", $orcamento.valorTotal, $locale)</b>
+	            		 <b>$numberTool.format("¤ #0.00", $orcamento.valorTotal, $locale)</b>
 	            	</td>
             	</tr>
         </table>

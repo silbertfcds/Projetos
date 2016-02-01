@@ -38,7 +38,7 @@ public class EnvioOrcamentoEmailBean implements Serializable {
 		.put("orcamento", this.orcamento)
 		.put("numberTool", new NumberTool())
 		.put("locale", new Locale("pt", "BR"))
-		.charset("utf-8")
+		.charset("ISO-8859-1")
 
 		.send();
 		
