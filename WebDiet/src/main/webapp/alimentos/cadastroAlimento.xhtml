@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo Alimento</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="alimento" value="#{cadastroAlimentoBean.alimento}" />
+		</f:metadata>
+
+		<h:form id="frmAlimento">
+			<h1>Novo Alimento</h1>
+			<p:growl id="growlAlimento" showDetail="true" sticky="false" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/alimentos/cadastroAlimento"
+						icon="ui-icon-document" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						icon="ui-icon-disk" action="#{cadastroAlimentoBean.salvar}"
+						update="@form" process="@this :frmAlimento:painelAlimento" />
+
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/alimentos/pesquisaAlimento" icon="ui-icon-search" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" columnClasses="rotulo, campo"
+				id="painelAlimento" style="width: 100%; margin-top: 20px">
+
+				<p:outputLabel value="Descrição" for="descricao" />
+				<p:inputText id="descricao" size="60" maxlength="80"
+					value="#{cadastroAlimentoBean.alimento.descricao}"
+					onkeyup="validar(this,'text');" />
+
+
+				<p:outputLabel value="Qtd Calorias" for="caloria" />
+				<p:inputText id="caloria" size="10"
+					value="#{cadastroAlimentoBean.alimento.caloria}"
+					onkeyup="validar(this,'num');" styleClass="moeda"/>
+			</p:panelGrid>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ <!DOCTYPE html> 
+ <html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+ 
+ 	<h:head> 
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+         <title><ui:insert name="titulo">WEBDIET</ui:insert></title> 
+         <h:outputStylesheet library="css" name="sistema.css" />
+         <h:outputScript library="js" name="jquery.maskMoney.js"></h:outputScript>
+ 	</h:head> 
+ 
+ 
+ 	<h:body> 
+ 		<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
+ 			<f:facet name="start">
+ 				<h:graphicImage library="images" name="loading.gif"/>
+ 			</f:facet>
+ 			<f:facet name="complete">
+ 				<h:outputText value=""/>
+ 			</f:facet>
+ 		</p:ajaxStatus>
+ 		
+ 		<header> 
+ 			<div style="float: left"> 
+ 				<h:link outcome="/home"> 
+ 					<!--  <h:graphicImage library="images" name="proferro.png" width="120" height="15" style="margin-top: 7px"/>-->
+ 				</h:link> 
+ 			</div> 
+ 			<div style="float: right; margin-right: 110px">
+ 				<span style="float: left; height: 30px; line-height: 30px; margin-right: 60px"> Olá </span>
+ 				
+ 				<h:form style="display: inline-block">
+ 					<p:menubar styleClass="menu-sistema">
+ 						<p:submenu label="Cadastros">
+ 							<p:menuitem value="Pacientes" outcome="/pacientes/cadastroPaciente" icon="ui-icon-person"/>
+ 							<p:menuitem value="Alimentos" outcome="/alimentos/cadastroAlimento" icon="ui-icon-person"/>
+ 							<p:separator/>
+ 						</p:submenu>
+ 						
+	 					<p:submenu label="Dieta">
+	 						<p:menuitem value="Nova Dieta" outcome="/dietas/cadastroDieta" icon="ui-icon-document"/>
+	 						<p:menuitem value="Pesquisa"  icon="ui-icon-search"/>
+	 					</p:submenu>
+ 						<p:menuitem value="Sair"  icon="ui-icon-power"/>
+ 					</p:menubar>
+ 				</h:form>
+ 			</div>
+ 			<div style="clear: both"></div>
+ 		</header> 
+ 	
+ 	 
+	 	<div id="conteudo"> 
+	 		<ui:insert name="corpo"/> 
+	 	</div> 
+	 	 
+	 	<p:separator style="margin-top: 20px"/> 
+	 	 
+	 	<footer> 
+	 		WebDiet
+	 	</footer> 
+ 		
+ 		<script>
+ 			function configurarMoeda(){
+ 				$(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});
+ 			}
+ 			$(document).ready(function(){
+ 				configurarMoeda();
+ 			})
+ 			function validar(dom,tipo){
+				switch(tipo){
+					case'num':var regex=/[A-Za-z]/g;break;
+					case'text':var regex=/\d/g;break;
+			}
+				dom.value=dom.value.replace(regex,'');
+			}
+ 		</script>
+ 		<script>
+	 		PrimeFaces.locales['pt_BR'] = {  
+	                closeText: 'Fechar',  
+	                prevText: 'Anterior',  
+	                nextText: 'Próximo',  
+	                currentText: 'Começo',  
+	                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+	                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+	                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+	                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+	                dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+	                weekHeader: 'Semana',  
+	                firstDay: 1,  
+	                isRTL: false,  
+	                showMonthAfterYear: false,  
+	                yearSuffix: '',  
+	                timeOnlyTitle: 'Só Horas',  
+	                timeText: 'Tempo',  
+	                hourText: 'Hora',  
+	                minuteText: 'Minuto',  
+	                secondText: 'Segundo',  
+	                currentText: 'Data Atual',  
+	                ampm: false,  
+	                month: 'Mês',  
+	                week: 'Semana',  
+	                day: 'Dia',  
+	                allDayText : 'Todo Dia'  
+	            };
+ 		</script>
+ 	</h:body> 
+ </html> 
