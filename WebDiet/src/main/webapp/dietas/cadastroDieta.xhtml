@@ -24,130 +24,123 @@
 
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:commandButton value="Adicionar itens"   icon="ui-icon-circle-plus"/>
+					<p:commandButton value="Adicionar itens" icon="ui-icon-circle-plus" 
+						onclick="PF('adicionarItemDialog').show(); return false"/>
 					<p:button value="Pesquisa" icon="ui-icon-search" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
-		 <p:panel id="dados" header="DADOS" style="margin-bottom:20px; margin-top:20px">
-			<p:panelGrid columns="2" columnClasses="rotulo, campo"
-				id="painelDieta" style="width: 100%; margin-top: 20px">
+			<p:panel id="dados" header="DADOS"
+				style="margin-bottom:20px; margin-top:20px">
+				<p:panelGrid columns="2" columnClasses="rotulo, campo"
+					id="painelDieta" style="width: 100%; margin-top: 20px">
 
-				<p:outputLabel value="Descrição" for="descricao" />
-				<p:inputText id="descricao" size="40" maxlength="60"
-					onkeyup="validar(this,'text');" />
+					<p:outputLabel value="Descrição" for="descricao" />
+					<p:inputText id="descricao" size="40" maxlength="60"
+						onkeyup="validar(this,'text');" />
 
-				<p:outputLabel value="Paciente" for="paciente" />
-				<p:autoComplete id="paciente" size="40" dropdown="true"
-					forceSelection="true" onkeyup="validar(this,'text');" />
+					<p:outputLabel value="Paciente" for="paciente" />
+					<p:autoComplete id="paciente" size="40" dropdown="true"
+						forceSelection="true" onkeyup="validar(this,'text');" />
 
-			</p:panelGrid>
-		</p:panel>
+				</p:panelGrid>
+			</p:panel>
 
-		 <p:panel id="basic" header="PLANO ALIMENTAR"  style="margin-bottom:20px">
-			<p:dataTable id="cafe" var="cafe" emptyMessage="Nenhum item cadastrado.">
-				<f:facet name="header">
+			<p:panel id="basic" header="PLANO ALIMENTAR"
+				style="margin-bottom:20px">
+				<p:dataTable id="cafe" var="itensCafe" value="#{cadastroDietaBean.listaCafe}"
+					emptyMessage="Nenhum item cadastrado.">
+					<f:facet name="header">
             		Café da manhã (06:30h)
        			 </f:facet>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-			</p:dataTable>
-			<p:dataTable id="lanche" var="lanche" emptyMessage="Nenhum item cadastrado.">
-				<f:facet name="header">
+					<p:column>
+						<h:outputText value="#{itensCafe.alimento.descricao}" />
+					</p:column>
+				</p:dataTable>
+				<p:dataTable id="lanche" var="lanche" value="#{cadastroDietaBean.listaLancheManha}"
+					emptyMessage="Nenhum item cadastrado.">
+					<f:facet name="header">
             		Lanche da manhã (09:30h)
        			 </f:facet>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-			</p:dataTable>
-			<p:dataTable id="almoco" var="almoco" emptyMessage="Nenhum item cadastrado.">
-				<f:facet name="header">
+					<p:column>
+						<h:outputText value="#{lanche.alimento.descricao}"  />
+					</p:column>
+				</p:dataTable>
+				<p:dataTable id="almoco" var="almoco" value="#{cadastroDietaBean.listaAlmoco}"
+					emptyMessage="Nenhum item cadastrado.">
+					<f:facet name="header">
             		Almoço (12:30h)
        			 </f:facet>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-			</p:dataTable>
-			<p:dataTable id="lancheTarde" var="lancheTarde" emptyMessage="Nenhum item cadastrado.">
-				<f:facet name="header">
+					<p:column>
+						<h:outputText value="#{almoco.alimento.descricao}"  />
+					</p:column>
+				</p:dataTable>
+				<p:dataTable id="lancheTarde" var="lancheTarde" value="#{cadastroDietaBean.listaLancheTarde}"
+					emptyMessage="Nenhum item cadastrado.">
+					<f:facet name="header">
             		Lanche da tarde (15:30h)
        			 </f:facet>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-			</p:dataTable>
-			<p:dataTable id="jantar" var="jantar" emptyMessage="Nenhum item cadastrado.">
-				<f:facet name="header">
+					<p:column>
+						<h:outputText value="#{lancheTarde.alimento.descricao}"  />
+					</p:column>
+				</p:dataTable>
+				<p:dataTable id="jantar" var="jantar" value="#{cadastroDietaBean.listaJanta}"
+					emptyMessage="Nenhum item cadastrado.">
+					<f:facet name="header">
             		Jantar (19:00h)
        			 </f:facet>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-			</p:dataTable>
-			<p:dataTable id="ceia" var="ceia" emptyMessage="Nenhum item cadastrado.">
-				<f:facet name="header">
+					<p:column>
+						<h:outputText value="#{jantar.alimento.descricao}"/>
+					</p:column>
+				</p:dataTable>
+				<p:dataTable id="ceia" var="ceia" value="#{cadastroDietaBean.listaCeia}"
+					emptyMessage="Nenhum item cadastrado.">
+					<f:facet name="header">
             		Ceia (22:00h)
        			 </f:facet>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-				<p:column >
-					<h:outputText value="teste" />
-				</p:column>
-			</p:dataTable>
-		</p:panel>
+					<p:column>
+						<h:outputText value="#{ceia.alimento.descricao}"/>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+
+
+			<p:dialog header="Inclusão de itens" id="dialogItens"
+				widgetVar="adicionarItemDialog" modal="true" resizable="false">
+				<h:panelGroup id="inclusaoPanel">
+
+					<h:panelGrid id="painelItem" columns="2">
+						<p:outputLabel value="Alimento" for="alimento" />
+						<p:autoComplete id="alimento" size="40" dropdown="true"
+							value="#{cadastroDietaBean.novoItem.alimento}"
+							completeMethod="#{cadastroDietaBean.completarAlimento}"
+							var="alimento" itemLabel="#{alimento.descricao}"
+							itemValue="#{alimento}" forceSelection="true"
+							onkeyup="validar(this,'text');" />
+
+						<p:outputLabel value="Horário" for="horario" />
+						<p:selectOneMenu id="horario"
+							value="#{cadastroDietaBean.novoItem.horario}" required="true"
+							requiredMessage="Horário da refeição deve ser informado.">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroDietaBean.horarios}"
+								var="grupo" itemValue="#{horario}" itemLabel="#{horario.descricao}" />
+						</p:selectOneMenu>
+
+						
+						<p:spacer />
+						<p:commandButton value="Incluir" style="margin-top: 20px"
+							action="#{cadastroDietaBean.adicionarAlimento}"
+							process="painelItem"
+							update=":frmDieta:basic, :frmDieta:growlDieta"
+							ajax="false" />
+
+					</h:panelGrid>
+
+				</h:panelGroup>
+			</p:dialog>
+			
+
 		</h:form>
 	</ui:define>
 </ui:composition>

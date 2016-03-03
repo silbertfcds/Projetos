@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "item_dieta")
@@ -22,7 +21,6 @@ public class ItemDieta implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@NotNull(message = "é obrigatório")
 	@Column(name = "caloria", nullable = false, precision = 10, scale = 2)
 	private double caloria;
 	@ManyToOne
@@ -118,5 +116,8 @@ public class ItemDieta implements Serializable {
 			return false;
 		return true;
 	}
-
+	@Override
+	public String toString() {
+		return getAlimento().toString();
+	}
 }

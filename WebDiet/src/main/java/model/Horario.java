@@ -3,7 +3,7 @@ package model;
 public enum Horario {
 
 	CAFE("Cafe"), 
-	LANCHEMANHA("Lanche Manhã"),
+	LANCHEMANHA("Lanche Manha"),
 	ALMOCO("Almoco"),
 	LANCHETARDE("Lanche Tarde"),
 	JANTAR("Jantar"),

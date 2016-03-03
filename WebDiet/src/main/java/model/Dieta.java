@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -106,4 +107,13 @@ public class Dieta implements Serializable {
 		return true;
 	}
 
+	@Transient
+	public boolean isNovo(){
+		return getId()==null;
+	}
+	
+	@Transient
+	public boolean isEditando(){
+		return!isNovo();
+	}
 }

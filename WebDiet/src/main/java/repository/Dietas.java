@@ -18,4 +18,7 @@ public class Dietas implements Serializable{
 		return manager.find(Dieta.class, id);
 	}
 	
+	public Dieta guardar(Dieta dieta){
+		return manager.merge(dieta);
+	}
 }
