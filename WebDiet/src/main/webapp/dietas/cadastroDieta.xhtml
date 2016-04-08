@@ -20,6 +20,8 @@
 					<p:button value="Novo" outcome="/dietas/cadastroDieta"
 						icon="ui-icon-document" />
 					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroDietaBean.salvar}"
+						update="@form"
 						icon="ui-icon-disk" />
 
 				</p:toolbarGroup>
@@ -41,6 +43,8 @@
 
 					<p:outputLabel value="Paciente" for="paciente" />
 					<p:autoComplete id="paciente" size="40" dropdown="true"
+						value="#{cadastroDietaBean.dieta.paciente}" completeMethod="#{cadastroDietaBean.completarPaciente}"
+						var="paciente" itemLabel="#{paciente.nome}" itemValue="#{paciente}"
 						forceSelection="true" onkeyup="validar(this,'text');" />
 
 				</p:panelGrid>
@@ -116,12 +120,12 @@
 							completeMethod="#{cadastroDietaBean.completarAlimento}"
 							var="alimento" itemLabel="#{alimento.descricao}"
 							itemValue="#{alimento}" forceSelection="true"
+						
 							onkeyup="validar(this,'text');" />
 
 						<p:outputLabel value="Horário" for="horario" />
 						<p:selectOneMenu id="horario"
-							value="#{cadastroDietaBean.novoItem.horario}" required="true"
-							requiredMessage="Horário da refeição deve ser informado.">
+							value="#{cadastroDietaBean.novoItem.horario}" >
 							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems value="#{cadastroDietaBean.horarios}"
 								var="grupo" itemValue="#{horario}" itemLabel="#{horario.descricao}" />

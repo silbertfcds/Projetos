@@ -12,7 +12,9 @@ import model.Alimento;
 import model.Dieta;
 import model.Horario;
 import model.ItemDieta;
+import model.Paciente;
 import repository.Alimentos;
+import repository.Pacientes;
 import service.DietaService;
 import util.jsf.FacesUtil;
 
@@ -32,7 +34,12 @@ public class CadastroDietaBean implements Serializable {
 	@Inject
 	private Alimentos alimentos;
 	
+	@Inject
+	private Pacientes pacientes;
+	
 	private ItemDieta novoItem;
+	
+	private List<ItemDieta> listaAux = new ArrayList<ItemDieta>();
 	
 	private List<ItemDieta> listaCafe = new ArrayList<ItemDieta>();
 	private List<ItemDieta> listaLancheManha = new ArrayList<ItemDieta>();
@@ -46,7 +53,7 @@ public class CadastroDietaBean implements Serializable {
 		limpar();
 	}
 	
-	public void salvar(Dieta dieta){
+	public void salvar(){
 		service.salvar(dieta);
 		FacesUtil.addInfoMessage("Dieta salva com sucesso. ");
 		limpar();
@@ -75,6 +82,7 @@ public class CadastroDietaBean implements Serializable {
 			dieta.getItens().add(novoItem);
 			novoItem.setDieta(dieta);
 			classificacaoItem();
+			//dieta.getItens().remove(novoItem);
 			novoItem =  new ItemDieta();
 			FacesUtil.addInfoMessage("Item adicionado.");
 		}else{
@@ -84,6 +92,10 @@ public class CadastroDietaBean implements Serializable {
 
 	public List<Alimento> completarAlimento(String descricao){
 		return  alimentos.porDescricao(descricao);
+	}
+	
+	public List<Paciente> completarPaciente(String descricao){
+		return pacientes.porNome(descricao);
 	}
 	
 	public void limpar(){
@@ -165,6 +177,14 @@ public class CadastroDietaBean implements Serializable {
 
 	public void setListaCeia(List<ItemDieta> listaCeia) {
 		this.listaCeia = listaCeia;
+	}
+
+	public List<ItemDieta> getListaAux() {
+		return listaAux;
+	}
+
+	public void setListaAux(List<ItemDieta> listaAux) {
+		this.listaAux = listaAux;
 	}
 	
 }
