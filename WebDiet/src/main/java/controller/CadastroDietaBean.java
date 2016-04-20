@@ -39,8 +39,6 @@ public class CadastroDietaBean implements Serializable {
 	
 	private ItemDieta novoItem;
 	
-	private List<ItemDieta> listaAux = new ArrayList<ItemDieta>();
-	
 	private List<ItemDieta> listaCafe = new ArrayList<ItemDieta>();
 	private List<ItemDieta> listaLancheManha = new ArrayList<ItemDieta>();
 	private List<ItemDieta> listaAlmoco = new ArrayList<ItemDieta>();
@@ -59,30 +57,27 @@ public class CadastroDietaBean implements Serializable {
 		limpar();
 	}
 
-	private void classificacaoItem(){
-		for(ItemDieta item: getDieta().getItens()){
-			if(item.getHorario().getDescricao().equals("Cafe")){
-				listaCafe.add(item);
-			}else if(item.getHorario().getDescricao().equals("Lanche Manha")){
-				listaLancheManha.add(item);
-			}else if(item.getHorario().getDescricao().equals("Almoco")){
-				listaAlmoco.add(item);
-			}else if(item.getHorario().getDescricao().equals("Lanche Tarde")){
-				listaLancheTarde.add(item);
-			}else if(item.getHorario().getDescricao().equals("Jantar")){
-				listaJanta.add(item);
-			}else{
-				listaCeia.add(item);
-			}
+	private void classificacaoItem(ItemDieta item){
+		if(item.getHorario().getDescricao().equals("Cafe")){
+			listaCafe.add(item);
+		}else if(item.getHorario().getDescricao().equals("Lanche Manha")){
+			listaLancheManha.add(item);
+		}else if(item.getHorario().getDescricao().equals("Almoco")){
+			listaAlmoco.add(item);
+		}else if(item.getHorario().getDescricao().equals("Lanche Tarde")){
+			listaLancheTarde.add(item);
+		}else if(item.getHorario().getDescricao().equals("Jantar")){
+			listaJanta.add(item);
+		}else{
+			listaCeia.add(item);
 		}
  	}
 	
 	public void adicionarAlimento(){
 		if(!novoItem.getAlimento().getDescricao().equals("")){
+			classificacaoItem(novoItem);
 			dieta.getItens().add(novoItem);
 			novoItem.setDieta(dieta);
-			classificacaoItem();
-			//dieta.getItens().remove(novoItem);
 			novoItem =  new ItemDieta();
 			FacesUtil.addInfoMessage("Item adicionado.");
 		}else{
@@ -179,12 +174,4 @@ public class CadastroDietaBean implements Serializable {
 		this.listaCeia = listaCeia;
 	}
 
-	public List<ItemDieta> getListaAux() {
-		return listaAux;
-	}
-
-	public void setListaAux(List<ItemDieta> listaAux) {
-		this.listaAux = listaAux;
-	}
-	
 }
