@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Alimento implements Serializable {
 	private String descricao;
 	@NotNull(message = "é obrigatório")
 	@Column(name="caloria", nullable = false, precision = 10, scale = 2)
-	private double caloria;
+	private BigDecimal caloria;
 
 	public Long getId() {
 		return id;
@@ -45,11 +46,11 @@ public class Alimento implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public double getCaloria() {
+	public BigDecimal getCaloria() {
 		return caloria;
 	}
 
-	public void setCaloria(double caloria) {
+	public void setCaloria(BigDecimal caloria) {
 		this.caloria = caloria;
 	}
 
@@ -57,9 +58,7 @@ public class Alimento implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(caloria);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((caloria == null) ? 0 : caloria.hashCode());
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -75,8 +74,10 @@ public class Alimento implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Alimento other = (Alimento) obj;
-		if (Double.doubleToLongBits(caloria) != Double
-				.doubleToLongBits(other.caloria))
+		if (caloria == null) {
+			if (other.caloria != null)
+				return false;
+		} else if (!caloria.equals(other.caloria))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)

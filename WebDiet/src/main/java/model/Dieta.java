@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Dieta implements Serializable {
 	private Long id;
 	@NotNull
 	@Column(name = "total_caloria", nullable = false, precision = 10, scale = 2)
-	private double totalCalorias;
+	private BigDecimal totalCalorias;
 	@ManyToOne
 	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente paciente;
@@ -50,11 +51,11 @@ public class Dieta implements Serializable {
 		this.id = id;
 	}
 
-	public double getTotalCalorias() {
+	public BigDecimal getTotalCalorias() {
 		return totalCalorias;
 	}
 
-	public void setTotalCalorias(double totalCalorias) {
+	public void setTotalCalorias(BigDecimal totalCalorias) {
 		this.totalCalorias = totalCalorias;
 	}
 

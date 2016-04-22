@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class ItemDieta implements Serializable {
 	@GeneratedValue
 	private Long id;
 	@Column(name = "caloria", nullable = false, precision = 10, scale = 2)
-	private double caloria;
+	private BigDecimal caloria;
 	@ManyToOne
 	@JoinColumn(name = "alimento_id", nullable = false)
 	private Alimento alimento;
@@ -41,11 +42,11 @@ public class ItemDieta implements Serializable {
 		this.id = id;
 	}
 
-	public double getCaloria() {
+	public BigDecimal getCaloria() {
 		return caloria;
 	}
 
-	public void setCaloria(double caloria) {
+	public void setCaloria(BigDecimal caloria) {
 		this.caloria = caloria;
 	}
 
@@ -79,10 +80,7 @@ public class ItemDieta implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((alimento == null) ? 0 : alimento.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(caloria);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((dieta == null) ? 0 : dieta.hashCode());
+		result = prime * result + ((horario == null) ? 0 : horario.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -101,13 +99,7 @@ public class ItemDieta implements Serializable {
 				return false;
 		} else if (!alimento.equals(other.alimento))
 			return false;
-		if (Double.doubleToLongBits(caloria) != Double
-				.doubleToLongBits(other.caloria))
-			return false;
-		if (dieta == null) {
-			if (other.dieta != null)
-				return false;
-		} else if (!dieta.equals(other.dieta))
+		if (horario != other.horario)
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -116,6 +108,7 @@ public class ItemDieta implements Serializable {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return getAlimento().toString();
