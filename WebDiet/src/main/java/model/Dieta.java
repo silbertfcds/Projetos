@@ -108,6 +108,19 @@ public class Dieta implements Serializable {
 		return true;
 	}
 
+	public void calcularTotalCalorias(){
+		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal caloria = BigDecimal.ZERO;
+		
+		for(ItemDieta item: itens){
+			caloria = item.getAlimento().getCaloria();
+			item.setCaloria(caloria);
+			total.add(item.getCaloria());
+		}
+		
+		setTotalCalorias(total);
+	}
+	
 	@Transient
 	public boolean isNovo(){
 		return getId()==null;

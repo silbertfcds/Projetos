@@ -77,6 +77,7 @@ public class CadastroDietaBean implements Serializable {
 		if(!novoItem.getAlimento().getDescricao().equals("")){
 			classificacaoItem(novoItem);
 			dieta.getItens().add(novoItem);
+			//dieta.calcularTotalCalorias();
 			novoItem.setDieta(dieta);
 			novoItem =  new ItemDieta();
 			FacesUtil.addInfoMessage("Item adicionado.");
