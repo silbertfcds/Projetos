@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,22 +18,19 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(nullable = false, length = 150)
+	@Column(length = 150)
 	private String logradouro;
-	@Column(nullable = false, length = 20)
+	@Column(length = 20)
 	private String numero;
 	@Column(length = 150)
 	private String complemento;
-	@Column(nullable = false, length = 60)
+	@Column(length = 60)
 	private String cidade;
-	@Column(nullable = false, length = 60)
+	@Column(length = 60)
 	private String uf;
-	@Column(nullable = false, length = 9)
+	@Column(length = 9)
 	private String cep;
-	@ManyToOne
-	@JoinColumn(name = "paciente_id", nullable = false)
-	private Paciente paciente;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -92,21 +87,12 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
 		result = prime * result
 				+ ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -135,11 +121,6 @@ public class Endereco implements Serializable {
 			if (other.cidade != null)
 				return false;
 		} else if (!cidade.equals(other.cidade))
-			return false;
-		if (paciente == null) {
-			if (other.paciente != null)
-				return false;
-		} else if (!paciente.equals(other.paciente))
 			return false;
 		if (complemento == null) {
 			if (other.complemento != null)

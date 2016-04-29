@@ -37,10 +37,10 @@
 	    		rows="3" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 	    	
 	    		<p:column headerText="Nome" style="text-align: left">
-	    			<h:outputText value="#{paciente.nome}"/>
+	    			<h:outputText value="#{paciente.dadosPessoais.nome}"/>
 	    		</p:column>
 	    		<p:column headerText="CPF" style="text-align: left; width: 110px">
-	    			<h:outputText value="#{paciente.documentoReceitaFederal}"/>
+	    			<h:outputText value="#{paciente.dadosPessoais.documentoReceitaFederal}"/>
 	    		</p:column>
 	    		<p:column style="text-align: center; width: 70px">
 	    			

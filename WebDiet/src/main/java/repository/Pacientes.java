@@ -38,7 +38,7 @@ public class Pacientes implements Serializable {
 	
 	public Paciente porCpf(String documentoReceitaFederal){
 		try {
-			return manager.createQuery("from Paciente where documentoReceitaFederal = :documentoReceitaFederal",Paciente.class)
+			return manager.createQuery("from Paciente where dadosPessoais.documentoReceitaFederal = :documentoReceitaFederal",Paciente.class)
 					.setParameter("documentoReceitaFederal", documentoReceitaFederal)
 					.getSingleResult();
 		} catch (NoResultException e) {
@@ -70,15 +70,15 @@ public class Pacientes implements Serializable {
 		Criteria criteria = session.createCriteria(Paciente.class);
 		
 		if(StringUtils.isNotBlank(filtro.getDocumentoReceitaFederal())){
-			criteria.add(Restrictions.ilike("documentoReceitaFederal", filtro.getDocumentoReceitaFederal(), 
+			criteria.add(Restrictions.ilike("dadosPessoais.documentoReceitaFederal", filtro.getDocumentoReceitaFederal(), 
 					MatchMode.ANYWHERE));
 		}
 		
 		if(StringUtils.isNotBlank(filtro.getNome())){
-			criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
+			criteria.add(Restrictions.ilike("dadosPessoais.nome", filtro.getNome(), MatchMode.ANYWHERE));
 		}
 		
-		return criteria.addOrder(Order.asc("nome")).list();
+		return criteria.addOrder(Order.asc("dadosPessoais.nome")).list();
 	}
 
 }

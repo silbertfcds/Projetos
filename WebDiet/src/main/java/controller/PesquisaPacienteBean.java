@@ -45,7 +45,7 @@ public class PesquisaPacienteBean implements Serializable{
 		pacientes.remover(pacienteSelecionado);
 		pacientesFiltrados.remove(pacienteSelecionado);
 		
-		FacesUtil.addInfoMessage("Paciente " + pacienteSelecionado.getNome()+ " excluído com sucesso.");
+		FacesUtil.addInfoMessage("Paciente " + pacienteSelecionado.getDadosPessoais().getNome()+ " excluído com sucesso.");
 	}
 	
 	public Paciente getPacienteSelecionado() {

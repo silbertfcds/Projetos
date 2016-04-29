@@ -1,20 +1,16 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "paciente")
@@ -24,23 +20,25 @@ public class Paciente implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@Column(name="paciente_id")
 	private Long id;
-	@NotBlank
-	@Size(max = 100)
-	@Column(nullable = false)
-	private String nome;
-	@NotBlank
-	@Size(max = 14)
-	@Column(name = "doc_receita_federal", nullable = false, length = 30)
-	private String documentoReceitaFederal;
-	@NotBlank
-	@Email
-	@Column(nullable = false)
-	private String email;
-	@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Telefone> telefones = new ArrayList<>();
-	@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	
+	@Embedded
+	private DadosPessoais dadosPessoais = new DadosPessoais();
+	
+	@OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+	private Historico historico;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
+	
+	public Historico getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(Historico historico) {
+		this.historico = historico;
+	}
 
 	public Long getId() {
 		return id;
@@ -50,46 +48,32 @@ public class Paciente implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public DadosPessoais getDadosPessoais() {
+		return dadosPessoais;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDadosPessoais(DadosPessoais dadosPessoais) {
+		this.dadosPessoais = dadosPessoais;
 	}
 
-	public String getDocumentoReceitaFederal() {
-		return documentoReceitaFederal;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setDocumentoReceitaFederal(String documentoReceitaFederal) {
-		this.documentoReceitaFederal = documentoReceitaFederal;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
-	public String getEmail() {
-		return email;
+	@Transient
+	public boolean isNovo(){
+		return getId()==null;
 	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	
+	@Transient
+	public boolean isEditando(){
+		return !isNovo();
 	}
-
-	public List<Telefone> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
-	}
-
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,9 +99,5 @@ public class Paciente implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return nome;
-	}
 
 }

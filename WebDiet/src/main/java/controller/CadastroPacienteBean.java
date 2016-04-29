@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
@@ -8,9 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.Endereco;
+import model.Historico;
 import model.Paciente;
-import model.Telefone;
-import model.TipoTelefone;
 import service.PacienteService;
 import util.jsf.FacesUtil;
 
@@ -22,16 +23,11 @@ public class CadastroPacienteBean implements Serializable {
 
 	@Inject
 	private PacienteService pacienteService;
-
-	private Telefone novoTelefone;
-	private Telefone removeTelefone;
-	
-	private Endereco novoEndereco;
-	private Endereco removeEndereco;
-	
 	@Produces
 	@PacienteEdicao
 	private Paciente paciente;
+	private Endereco endereco;
+	private Historico historico;
 
 	public CadastroPacienteBean() {
 		limpar();
@@ -39,18 +35,22 @@ public class CadastroPacienteBean implements Serializable {
 	
 	public void limpar(){
 		paciente = new Paciente();
-		novoTelefone = new Telefone();
-		novoEndereco = new Endereco();
-		
+		endereco = new Endereco();
+		historico = new Historico();
 	}
 	
 	public void salvar() {
+		if(paciente.isNovo()){
+			paciente.setEndereco(endereco);
+			paciente.setHistorico(historico);
+		}
+		converterArray();
 		paciente = pacienteService.salvar(paciente);
-		limpar();
+		//limpar();
 		FacesUtil.addInfoMessage("Paciente adicionado com sucesso.");
 	}
 	
-	public void adicionarTelefone(){
+/*	public void adicionarTelefone(){
 		if(!novoTelefone.getNumero().equals("") && novoTelefone.getTipoTelefone()!=null){
 			paciente.getTelefones().add(novoTelefone);
 			novoTelefone.setPaciente(paciente);
@@ -81,7 +81,7 @@ public class CadastroPacienteBean implements Serializable {
 	public void excluirEndereco(){
 		this.paciente.getEnderecos().remove(removeEndereco);
 		FacesUtil.addInfoMessage("Endereço removido!");
-	}
+	}*/
 	
 	public Paciente getPaciente() {
 		if(paciente == null){
@@ -94,40 +94,27 @@ public class CadastroPacienteBean implements Serializable {
 		this.paciente = paciente;
 	}
 
-	public TipoTelefone[] getTiposTelefones(){
-		return TipoTelefone.values();
-	}
-	
-	public Telefone getNovoTelefone() {
-		return novoTelefone;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setNovoTelefone(Telefone novoTelefone) {
-		this.novoTelefone = novoTelefone;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
-	public Telefone getRemoveTelefone() {
-		return removeTelefone;
+	public Historico getHistorico() {
+		return historico;
 	}
 
-	public void setRemoveTelefone(Telefone removeTelefone) {
-		this.removeTelefone = removeTelefone;
+	public void setHistorico(Historico historico) {
+		this.historico = historico;
 	}
 
-	public Endereco getNovoEndereco() {
-		return novoEndereco;
+	public void converterArray(){
+		List<String> doencas = Arrays.asList(paciente.getHistorico().getArrayHistoricoFamiliar());
+		paciente.getHistorico().getDoencas().addAll(doencas);
+		List<String> queixas = Arrays.asList(paciente.getHistorico().getArrayQueixas());
+		paciente.getHistorico().getQueixas().addAll(queixas);
 	}
-
-	public void setNovoEndereco(Endereco novoEndereco) {
-		this.novoEndereco = novoEndereco;
-	}
-
-	public Endereco getRemoveEndereco() {
-		return removeEndereco;
-	}
-
-	public void setRemoveEndereco(Endereco removeEndereco) {
-		this.removeEndereco = removeEndereco;
-	}
-	
+  
 }
