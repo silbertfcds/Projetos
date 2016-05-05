@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -34,6 +37,14 @@ public class Paciente implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco = new Endereco();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_avaliacao_bioquimica")
+	private List<AvaliacaoBioquimica> listaAvaliacaoBioquimica = new ArrayList<AvaliacaoBioquimica>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_avaliacao_antropometrica")
+	private List<AvaliacaoAntropometrica> listaAvaliacaoAntropometrica = new ArrayList<AvaliacaoAntropometrica>();
 	
 	public Historico getHistorico() {
 		return historico;
@@ -65,6 +76,24 @@ public class Paciente implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<AvaliacaoBioquimica> getListaAvaliacaoBioquimica() {
+		return listaAvaliacaoBioquimica;
+	}
+
+	public void setListaAvaliacaoBioquimica(
+			List<AvaliacaoBioquimica> listaAvaliacaoBioquimica) {
+		this.listaAvaliacaoBioquimica = listaAvaliacaoBioquimica;
+	}
+	
+	public List<AvaliacaoAntropometrica> getListaAvaliacaoAntropometrica() {
+		return listaAvaliacaoAntropometrica;
+	}
+
+	public void setListaAvaliacaoAntropometrica(
+			List<AvaliacaoAntropometrica> listaAvaliacaoAntropometrica) {
+		this.listaAvaliacaoAntropometrica = listaAvaliacaoAntropometrica;
 	}
 
 	@Transient

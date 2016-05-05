@@ -8,6 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import model.AvaliacaoAntropometrica;
+import model.AvaliacaoBioquimica;
 import model.Endereco;
 import model.Historico;
 import model.Paciente;
@@ -25,6 +27,9 @@ public class CadastroPacienteBean implements Serializable {
 	@Produces
 	@PacienteEdicao
 	private Paciente paciente;
+	
+	private AvaliacaoAntropometrica novaAvaliacaoAntropometrica;
+	private AvaliacaoBioquimica novaAvaliacaoBioquimica;
 
 	public CadastroPacienteBean() {
 		limpar();
@@ -44,7 +49,24 @@ public class CadastroPacienteBean implements Serializable {
 		FacesUtil.addInfoMessage("Paciente adicionado com sucesso.");
 	}
 	
-	
+	public AvaliacaoAntropometrica getNovaAvaliacaoAntropometrica() {
+		return novaAvaliacaoAntropometrica;
+	}
+
+	public void setNovaAvaliacaoAntropometrica(
+			AvaliacaoAntropometrica novaAvaliacaoAntropometrica) {
+		this.novaAvaliacaoAntropometrica = novaAvaliacaoAntropometrica;
+	}
+
+	public AvaliacaoBioquimica getNovaAvaliacaoBioquimica() {
+		return novaAvaliacaoBioquimica;
+	}
+
+	public void setNovaAvaliacaoBioquimica(
+			AvaliacaoBioquimica novaAvaliacaoBioquimica) {
+		this.novaAvaliacaoBioquimica = novaAvaliacaoBioquimica;
+	}
+
 	public Paciente getPaciente() {
 		if(paciente == null){
 			paciente = new Paciente();
