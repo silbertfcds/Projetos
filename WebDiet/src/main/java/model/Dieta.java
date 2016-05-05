@@ -29,12 +29,13 @@ public class Dieta implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "id_dieta")
 	private Long id;
 	@NotNull
 	@Column(name = "total_caloria", nullable = false, precision = 10, scale = 2)
 	private BigDecimal totalCalorias;
 	@ManyToOne
-	@JoinColumn(name = "paciente_id", nullable = false)
+	@JoinColumn(name = "id_paciente", nullable = false)
 	private Paciente paciente;
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)

@@ -35,7 +35,7 @@
 					<p:panelGrid columns="4" columnClasses="rotulo, campo"
 						id="painelPaciente" style="width: 100%; margin-top: 20px">
 		
-						<p:outputLabel value="Nome" for="nome" />
+						<p:outputLabel for="nome" value="Nome"/>
 						<p:inputText id="nome" size="60" maxlength="80"
 							value="#{cadastroPacienteBean.paciente.dadosPessoais.nome}"
 							onkeyup="validar(this,'text');" />
@@ -43,69 +43,48 @@
 						<p:outputLabel value="Rua" />
 						<h:panelGroup>
 							<p:inputText size="35"
-								value="#{cadastroPacienteBean.endereco.logradouro}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="35"
 								value="#{cadastroPacienteBean.paciente.endereco.logradouro}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.editando}" />
+								onkeyup="validar(this,'text');"/>
 						</h:panelGroup>
 							
-						<p:outputLabel value="CPF" for="cpf" />
-						<p:inputMask id="cpf" size="20" maxlength="30"
-							value="#{cadastroPacienteBean.paciente.dadosPessoais.documentoReceitaFederal}"
-							mask="9999999999-9" />
+						<p:outputLabel for="dataNascimento" value="Data Nascimento:" />
+						<p:calendar id="dataNascimento" value="#{cadastroPacienteBean.paciente.dadosPessoais.dataNascimento}" pattern="dd/MM/yyyy" mask="true" size="6"/>
 						
 						<p:outputLabel value="Número" />
 						<h:panelGroup>
 							<p:inputText size="5"
-								value="#{cadastroPacienteBean.endereco.numero}"
-								onkeyup="validar(this,'num');" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="5"
 								value="#{cadastroPacienteBean.paciente.endereco.numero}"
-								onkeyup="validar(this,'num');" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								onkeyup="validar(this,'num');"/>
 						</h:panelGroup>
-							
-						<p:outputLabel value="E-mail" for="email" />
-						<p:inputText id="email" size="40" maxlength="60"
-							value="#{cadastroPacienteBean.paciente.dadosPessoais.email}" />
+						
+						<p:outputLabel value="CPF" for="cpf" />
+						<p:inputMask id="cpf" size="20" maxlength="30"
+							value="#{cadastroPacienteBean.paciente.dadosPessoais.documentoReceitaFederal}"
+							mask="9999999999-9" />
 							
 						<p:outputLabel value="Complemento" />
 						<h:panelGroup>
 							<p:inputText size="35"
-								value="#{cadastroPacienteBean.endereco.complemento}" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="35"
-								value="#{cadastroPacienteBean.paciente.endereco.complemento}" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								value="#{cadastroPacienteBean.paciente.endereco.complemento}"/>
 						</h:panelGroup>
-							
-						<p:outputLabel value="Telefone" for="Telefone" />
-						<p:inputMask id="Telefone"
-							value="#{cadastroPacienteBean.paciente.dadosPessoais.telefone}"
-							mask="(999) 99999-9999" />
+						
+						<p:outputLabel value="E-mail" for="email" />
+						<p:inputText id="email" size="40" maxlength="60"
+							value="#{cadastroPacienteBean.paciente.dadosPessoais.email}" />
 							
 						<p:outputLabel value="CEP" />
 						<h:panelGroup>
-							<p:inputMask value="#{cadastroPacienteBean.endereco.cep}"
-								mask="99999-999" rendered="#{cadastroPacienteBean.paciente.novo}"/>
 							<p:inputMask value="#{cadastroPacienteBean.paciente.endereco.cep}"
-								mask="99999-999" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								mask="99999-999"/>
 						</h:panelGroup>
-							
-						<p:outputLabel value="Ocupação" for="ocupacao" />
-						<p:inputText id="ocupacao" size="20" maxlength="40"
-							value="#{cadastroPacienteBean.paciente.dadosPessoais.ocupacao}" 
-							onkeyup="validar(this,'text');"/>
+						
+						<p:outputLabel value="Telefone" for="Telefone" />
+						<p:inputMask id="Telefone"
+							value="#{cadastroPacienteBean.paciente.dadosPessoais.telefone}"
+							mask="(999) 99999-9999" />	
 							
 						<p:outputLabel value="Cidade" />
-						<h:panelGroup rendered="#{cadastroPacienteBean.paciente.novo}">
-							<p:inputText value="#{cadastroPacienteBean.endereco.cidade}"
-								onkeyup="validar(this,'text');" />
-
-							<p:outputLabel value="UF" style="margin-left: 20px" />
-							<p:inputText size="2"
-								value="#{cadastroPacienteBean.endereco.uf}"
-								onkeyup="validar(this,'text');" />
-						</h:panelGroup>
-						<h:panelGroup rendered="#{cadastroPacienteBean.paciente.editando}">
+						<h:panelGroup>
 							<p:inputText value="#{cadastroPacienteBean.paciente.endereco.cidade}"
 								onkeyup="validar(this,'text');" />
 
@@ -114,47 +93,39 @@
 								value="#{cadastroPacienteBean.paciente.endereco.uf}"
 								onkeyup="validar(this,'text');" />
 						</h:panelGroup>
+						
+						<p:outputLabel value="Ocupação" for="ocupacao" />
+						<p:inputText id="ocupacao" size="20" maxlength="40"
+							value="#{cadastroPacienteBean.paciente.dadosPessoais.ocupacao}" 
+							onkeyup="validar(this,'text');"/>
+					    
 					</p:panelGrid>
 				</p:tab>
 				<p:tab title="Histórico">
-					<h:panelGrid columns="2" columnClasses="rotulo, campo"
+					<p:panelGrid columns="2" columnClasses="rotulo, campo"
 						id="painelAtividadeFisica" style="width: 100%; margin-top: 20px">
 						
 						<p:outputLabel value="Histórico familiar:"/>
 						<h:panelGroup>
-						    <p:selectManyCheckbox value="#{cadastroPacienteBean.historico.arrayHistoricoFamiliar}" rendered="#{cadastroPacienteBean.paciente.novo}">
-						        <f:selectItem itemLabel="Diabetes" itemValue="Diabetes" />
-						        <f:selectItem itemLabel="Has" itemValue="Has" />
-						        <f:selectItem itemLabel="Renal" itemValue="Renal" />
-						        <f:selectItem itemLabel="Câncer" itemValue="Cancer" />
-						        <f:selectItem itemLabel="Cardiopatia" itemValue="Cardiopatia" />
-						        <f:selectItem itemLabel="Outro" itemValue="Outro" />
-						    </p:selectManyCheckbox>
-						    <p:selectManyCheckbox value="#{cadastroPacienteBean.paciente.historico.arrayHistoricoFamiliar}" rendered="#{cadastroPacienteBean.paciente.editando}">
-						        <f:selectItem itemLabel="Diabetes" itemValue="Diabetes" />
-						        <f:selectItem itemLabel="Has" itemValue="Has" />
-						        <f:selectItem itemLabel="Renal" itemValue="Renal" />
-						        <f:selectItem itemLabel="Câncer" itemValue="Cancer" />
-						        <f:selectItem itemLabel="Cardiopatia" itemValue="Cardiopatia" />
-						        <f:selectItem itemLabel="Outro" itemValue="Outro" />
+						    <p:selectManyCheckbox value="#{cadastroPacienteBean.paciente.historico.doencas}"
+						    	collectionType="java.util.ArrayList">
+						    	<f:selectItem itemLabel="Diabetes" itemValue="Diabetes" />
+					    		<f:selectItem itemLabel="Has" itemValue="Has" />
+						    	<f:selectItem itemLabel="Renal" itemValue="Renal" />
+						    	<f:selectItem itemLabel="Câncer" itemValue="Cancer" />
+						    	<f:selectItem itemLabel="Cardiopatia" itemValue="Cardiopatia" />
 						    </p:selectManyCheckbox>
 					    </h:panelGroup>
 					    
 					    <p:outputLabel value="Outro:" />
 					    <h:panelGroup>
-					    	<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.historico.outrasDoencas}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.novo}"/>
 							<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.paciente.historico.outrasDoencas}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								onkeyup="validar(this,'text');"/>
 						</h:panelGroup>
 							
 						<p:outputLabel value="Atividade Física:"/>
 						<h:panelGroup>
-							<p:selectOneRadio value="#{cadastroPacienteBean.historico.atividadeFisica}" rendered="#{cadastroPacienteBean.paciente.novo}">
-					            <f:selectItem itemLabel="Sim" itemValue="true" />
-					            <f:selectItem itemLabel="Não" itemValue="false" />
-					        </p:selectOneRadio>
-							<p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.atividadeFisica}" rendered="#{cadastroPacienteBean.paciente.editando}">
+							<p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.atividadeFisica}">
 					            <f:selectItem itemLabel="Sim" itemValue="true" />
 					            <f:selectItem itemLabel="Não" itemValue="false" />
 					        </p:selectOneRadio>
@@ -163,44 +134,31 @@
 				        <p:outputLabel value="Tipo:" />
 				        <h:panelGroup>
 							<p:inputText size="30" maxlength="60"
-								value="#{cadastroPacienteBean.historico.tipoAtividadeFisica}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="30" maxlength="60"
 								value="#{cadastroPacienteBean.paciente.historico.tipoAtividadeFisica}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								onkeyup="validar(this,'text');"/>
 				        </h:panelGroup>
 				        
 						<p:outputLabel value="Duração:" />
 						<h:panelGroup>
 							<p:inputText size="10" maxlength="20"
-								value="#{cadastroPacienteBean.historico.duracaoAtividadeFisica}" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="10" maxlength="20"
-								value="#{cadastroPacienteBean.paciente.historico.duracaoAtividadeFisica}" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								value="#{cadastroPacienteBean.paciente.historico.duracaoAtividadeFisica}"/>
 						</h:panelGroup>
 						
 						<p:outputLabel value="Freqüencia:"/>
 						<h:panelGroup>
 							<p:inputText size="10" maxlength="10"
-								value="#{cadastroPacienteBean.historico.frequenciaAtividadeFisica}" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="10" maxlength="10"
-								value="#{cadastroPacienteBean.paciente.historico.frequenciaAtividadeFisica}" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								value="#{cadastroPacienteBean.paciente.historico.frequenciaAtividadeFisica}"/>
 						</h:panelGroup>
 							
 						<p:outputLabel value="Horas de sono:"/>
 						<h:panelGroup>
 							<p:inputText size="10" maxlength="10"
-								value="#{cadastroPacienteBean.historico.horaSono}" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="10" maxlength="10"
-								value="#{cadastroPacienteBean.paciente.historico.horaSono}" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								value="#{cadastroPacienteBean.paciente.historico.horaSono}"/>
 						</h:panelGroup>
 							
 						<p:outputLabel value="Já fez uso de suplementos alimentares:" />
 						<h:panelGroup>
-							<p:selectOneRadio value="#{cadastroPacienteBean.historico.suplemento}" rendered="#{cadastroPacienteBean.paciente.novo}">
-					            <f:selectItem itemLabel="Sim" itemValue="true" />
-					            <f:selectItem itemLabel="Não" itemValue="false" />
-					        </p:selectOneRadio>
-					        <p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.suplemento}" rendered="#{cadastroPacienteBean.paciente.editando}">
+					        <p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.suplemento}">
 					            <f:selectItem itemLabel="Sim" itemValue="true" />
 					            <f:selectItem itemLabel="Não" itemValue="false" />
 					        </p:selectOneRadio>
@@ -209,55 +167,85 @@
 				        <p:outputLabel value="Nome do Suplemento:" />
 				        <h:panelGroup>
 							<p:inputText size="30" maxlength="60"
-								value="#{cadastroPacienteBean.historico.descricaoSuplemento}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="30" maxlength="60"
 								value="#{cadastroPacienteBean.paciente.historico.descricaoSuplemento}"
-								onkeyup="validar(this,'text');" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								onkeyup="validar(this,'text');"/>
 				        </h:panelGroup>
 							
 						<p:outputLabel value="Por quanto tempo: "/>
 						<h:panelGroup>
 							<p:inputText size="10" maxlength="20"
-								value="#{cadastroPacienteBean.historico.tempoSuplemento}" rendered="#{cadastroPacienteBean.paciente.novo}"/>
-							<p:inputText size="10" maxlength="20"
-								value="#{cadastroPacienteBean.paciente.historico.tempoSuplemento}" rendered="#{cadastroPacienteBean.paciente.editando}"/>
+								value="#{cadastroPacienteBean.paciente.historico.tempoSuplemento}"/>
 						</h:panelGroup>
-							
-						<p:outputLabel value="Queixas:" for="queixas" />
+						
+						<p:outputLabel value="Fumante:" />
 						<h:panelGroup>
-						    <p:selectCheckboxMenu id="queixas" label="Citiess" value="#{cadastroPacienteBean.historico.arrayQueixas}"
-	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px" style="max-width:200px;" rendered="#{cadastroPacienteBean.paciente.novo}">
-						        <f:selectItem itemLabel="Azia/Queimação" itemValue="Azia/Queimação" />
-						        <f:selectItem itemLabel="Náuseas/Enjoo" itemValue="PS4" />
-						        <f:selectItem itemLabel="Vômito" itemValue="Náuseas/Enjoo" />
-						        <f:selectItem itemLabel="Diarreia" itemValue="Diarreia" />
-						        <f:selectItem itemLabel="Constipação/Fezes ressecadas" itemValue="Constipação/Fezes ressecadas" />
-						        <f:selectItem itemLabel="Sensação de empachamento" itemValue="Sensação de empachamento" />
-						        <f:selectItem itemLabel="Intolerante ao glúten" itemValue="Intolerante ao glúten" />
-						        <f:selectItem itemLabel="Intolerante à lactose" itemValue="Intolerante à lactose" />
-						        <f:selectItem itemLabel="Menopausa" itemValue="Menopausa" />
-						        <f:selectItem itemLabel="Tpm " itemValue="Tpm" />
-						        <f:selectItem itemLabel="Queda de cabelo" itemValue="Queda de cabelo" />
-						        <f:selectItem itemLabel="Unhas ressecadas" itemValue="Unhas ressecadas" />
-						    </p:selectCheckboxMenu>
-						    <p:selectCheckboxMenu id="queixas" label="Citiess" value="#{cadastroPacienteBean.paciente.historico.arrayQueixas}"
-	                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px" style="max-width:200px;" rendered="#{cadastroPacienteBean.paciente.editando}">
-						        <f:selectItem itemLabel="Azia/Queimação" itemValue="Azia/Queimação" />
-						        <f:selectItem itemLabel="Náuseas/Enjoo" itemValue="PS4" />
-						        <f:selectItem itemLabel="Vômito" itemValue="Náuseas/Enjoo" />
-						        <f:selectItem itemLabel="Diarreia" itemValue="Diarreia" />
-						        <f:selectItem itemLabel="Constipação/Fezes ressecadas" itemValue="Constipação/Fezes ressecadas" />
-						        <f:selectItem itemLabel="Sensação de empachamento" itemValue="Sensação de empachamento" />
-						        <f:selectItem itemLabel="Intolerante ao glúten" itemValue="Intolerante ao glúten" />
-						        <f:selectItem itemLabel="Intolerante à lactose" itemValue="Intolerante à lactose" />
-						        <f:selectItem itemLabel="Menopausa" itemValue="Menopausa" />
-						        <f:selectItem itemLabel="Tpm " itemValue="Tpm" />
-						        <f:selectItem itemLabel="Queda de cabelo" itemValue="Queda de cabelo" />
-						        <f:selectItem itemLabel="Unhas ressecadas" itemValue="Unhas ressecadas" />
-						    </p:selectCheckboxMenu>
+					        <p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.fumante}">
+					            <f:selectItem itemLabel="Sim" itemValue="true" />
+					            <f:selectItem itemLabel="Não" itemValue="false" />
+					        </p:selectOneRadio>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Quanto tempo:" />
 					    <h:panelGroup>
-					</h:panelGrid>
+							<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.paciente.historico.tempoFumante}"/>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Ingere bebida alcoólica:" />
+						<h:panelGroup>
+					        <p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.bebida}">
+					            <f:selectItem itemLabel="Sim" itemValue="true" />
+					            <f:selectItem itemLabel="Não" itemValue="false" />
+					        </p:selectOneRadio>
+						</h:panelGroup>
+											
+						<p:outputLabel value="Tipo:" />
+					    <h:panelGroup>
+							<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.paciente.historico.tipoBebida}"/>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Frequência:" />
+					    <h:panelGroup>
+							<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.paciente.historico.frequenciaBebida}"/>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Medicamentos" />
+					    <h:panelGroup>
+							<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.paciente.historico.medicamento}"/>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Já fez tratamento dietético:" />
+						<h:panelGroup>
+					        <p:selectOneRadio value="#{cadastroPacienteBean.paciente.historico.tratamentoDietetico}">
+					            <f:selectItem itemLabel="Sim" itemValue="true" />
+					            <f:selectItem itemLabel="Não" itemValue="false" />
+					        </p:selectOneRadio>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Qual o objetivo da consulta:" />
+					    <h:panelGroup>
+							<p:inputText size="30" maxlength="60" value="#{cadastroPacienteBean.paciente.historico.objetivoConsulta}"/>
+						</h:panelGroup>
+						
+						<p:outputLabel value="Queixas:"/>
+						<h:panelGroup>
+					        <p:selectCheckboxMenu value="#{cadastroPacienteBean.paciente.historico.queixas}" label="Queixas"
+                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px" collectionType="java.util.ArrayList">
+					            <f:selectItem itemLabel="Azia/queimação" itemValue="Azia" />
+					    		<f:selectItem itemLabel="Náuseas/enjoo" itemValue="Nauseas" />
+						    	<f:selectItem itemLabel="Vômito" itemValue="Vomito" />
+						    	<f:selectItem itemLabel="Constipação/fezes ressecadas" itemValue="Constipacao" />
+						    	<f:selectItem itemLabel="Refluxo g/i" itemValue="Refluxo" />
+						    	<f:selectItem itemLabel="Sensação de empachamento " itemValue="Empachamento" />
+						    	<f:selectItem itemLabel="Intolerante ao glúten" itemValue="Intolerante ao gluten" />
+						    	<f:selectItem itemLabel="Intolerante à lactose" itemValue="Intolerante a lactose" />
+						    	<f:selectItem itemLabel="Menopausa" itemValue="Menopausa" />
+						    	<f:selectItem itemLabel="Tpm" itemValue="Tpm" />
+						    	<f:selectItem itemLabel="Queda de cabelo" itemValue="Queda de cabelo" />
+						    	<f:selectItem itemLabel="Unhas ressecadas" itemValue="Unhas ressecadas" />
+					        </p:selectCheckboxMenu>
+					    </h:panelGroup>
+					    
+					</p:panelGrid>
 				</p:tab>
 			</p:tabView>
 		</h:form>

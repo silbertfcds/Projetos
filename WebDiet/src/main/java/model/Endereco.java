@@ -17,6 +17,7 @@ public class Endereco implements Serializable {
 	
 	@Id
 	@GeneratedValue
+	@Column(name="id_endereco")
 	private Long id;
 	@Column(length = 150)
 	private String logradouro;

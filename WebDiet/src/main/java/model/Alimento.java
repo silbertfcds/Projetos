@@ -21,6 +21,7 @@ public class Alimento implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@Column(name="id_alimento")
 	private Long id;
 	@NotBlank
 	@Size(max = 80)

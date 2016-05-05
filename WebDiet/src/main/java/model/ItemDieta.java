@@ -21,14 +21,15 @@ public class ItemDieta implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@Column(name="id_item_dieta")
 	private Long id;
 	@Column(name = "caloria", nullable = false, precision = 10, scale = 2)
 	private BigDecimal caloria;
 	@ManyToOne
-	@JoinColumn(name = "alimento_id", nullable = false)
+	@JoinColumn(name = "id_alimento", nullable = false)
 	private Alimento alimento;
 	@ManyToOne
-	@JoinColumn(name = "dieta_id", nullable = false)
+	@JoinColumn(name = "id_dieta", nullable = false)
 	private Dieta dieta;
 	@Column(nullable = false, length = 10)
 	@Enumerated(EnumType.STRING)

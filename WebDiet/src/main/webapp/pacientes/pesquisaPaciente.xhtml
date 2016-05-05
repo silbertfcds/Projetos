@@ -56,7 +56,7 @@
 	    	</p:dataTable>
 
 			<p:confirmDialog header="Exclusão de paciente"
-				message="Tem certeza que deseja excluir o paciente #{pesquisaPacienteBean.pacienteSelecionado.nome}"
+				message="Tem certeza que deseja excluir o paciente #{pesquisaPacienteBean.pacienteSelecionado.dadosPessoais.nome}"
 				widgetVar="confirmacao" id="exclusaoConfirmacaoPaciente">
 				<p:button value="Não"
 					onclick="PF('confirmacao').hide(); return false;" />

@@ -8,11 +8,16 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "historico")
@@ -22,6 +27,7 @@ public class Historico implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@Column(name="id_historico")
 	private Long id;
 	private boolean atividadeFisica;
 	@Column(length = 60)
@@ -32,19 +38,20 @@ public class Historico implements Serializable {
 	private String duracaoAtividadeFisica;
 	@Column(length = 20)
 	private String horaSono;
-
-	@ElementCollection
+	
+	@Cascade(value={CascadeType.ALL})
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SELECT)
 	@CollectionTable(name="queixa", joinColumns=@JoinColumn(name="historico_id"))
 	@Column(name="queixa_name")
 	private List<String> queixas = new ArrayList<String>();
-	@Transient
-	private String[] arrayQueixas;
-	@ElementCollection
+	@Cascade(value={CascadeType.ALL})
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SELECT)
 	@CollectionTable(name="doenca", joinColumns=@JoinColumn(name="historico_id"))
 	@Column(name="doenca_name")
 	private List<String> doencas = new ArrayList<String>();
-	@Transient
-	private String[] arrayHistoricoFamiliar;
+	
 	@Column(length = 150)
 	private String outrasDoencas;
 	
@@ -214,28 +221,12 @@ public class Historico implements Serializable {
 		this.queixas = queixas;
 	}
 
-	public String[] getArrayQueixas() {
-		return arrayQueixas;
-	}
-
-	public void setArrayQueixas(String[] arrayQueixas) {
-		this.arrayQueixas = arrayQueixas;
-	}
-
 	public List<String> getDoencas() {
 		return doencas;
 	}
 
 	public void setDoencas(List<String> doencas) {
 		this.doencas = doencas;
-	}
-
-	public String[] getArrayHistoricoFamiliar() {
-		return arrayHistoricoFamiliar;
-	}
-
-	public void setArrayHistoricoFamiliar(String[] arrayHistoricoFamiliar) {
-		this.arrayHistoricoFamiliar = arrayHistoricoFamiliar;
 	}
 
 	public String getOutrasDoencas() {
@@ -245,6 +236,5 @@ public class Historico implements Serializable {
 	public void setOutrasDoencas(String outrasDoencas) {
 		this.outrasDoencas = outrasDoencas;
 	}
-	
-	
+
 }

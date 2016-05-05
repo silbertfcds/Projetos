@@ -8,6 +8,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -20,17 +21,19 @@ public class Paciente implements Serializable {
 
 	@Id
 	@GeneratedValue
-	@Column(name="paciente_id")
+	@Column(name="id_paciente")
 	private Long id;
 	
 	@Embedded
 	private DadosPessoais dadosPessoais = new DadosPessoais();
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
-	private Historico historico;
+	@JoinColumn(name="id_historico")
+	private Historico historico = new Historico();
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private Endereco endereco;
+	@JoinColumn(name="id_endereco")
+	private Endereco endereco = new Endereco();
 	
 	public Historico getHistorico() {
 		return historico;

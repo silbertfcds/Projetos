@@ -23,7 +23,7 @@ public class PacienteService implements Serializable {
 		if(pacienteExistente!=null && !pacienteExistente.equals(paciente)){
 			throw new NegocioException("Já existe um Paciente com o CPF/CNPJ informado.");
 		}
-		paciente.getDadosPessoais().setDataNascimento(new Date());
+		//paciente.getDadosPessoais().setDataNascimento(new Date());
 		return pacientes.guardar(paciente);
 	}
 

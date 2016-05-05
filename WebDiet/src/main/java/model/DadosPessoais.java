@@ -28,7 +28,7 @@ public class DadosPessoais {
 	@Column(nullable = false)
 	private String email;
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
 	@NotBlank
