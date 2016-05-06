@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,7 +45,10 @@ public class AvaliacaoBioquimica implements Serializable {
 	private String hemoglobinaGlicada;
 	private String leucocitos;
 	private String linfocitos;
-
+	@ManyToOne
+	@JoinColumn(name = "id_paciente", nullable = false)
+	private Paciente paciente;
+	
 	public Long getId() {
 		return id;
 	}
@@ -170,6 +175,22 @@ public class AvaliacaoBioquimica implements Serializable {
 
 	public void setLinfocitos(String linfocitos) {
 		this.linfocitos = linfocitos;
+	}
+	
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	@Override

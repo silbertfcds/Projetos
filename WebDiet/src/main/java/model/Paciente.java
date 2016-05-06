@@ -38,12 +38,10 @@ public class Paciente implements Serializable {
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco = new Endereco();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_avaliacao_bioquimica")
+	@OneToMany(mappedBy = "paciente",  cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<AvaliacaoBioquimica> listaAvaliacaoBioquimica = new ArrayList<AvaliacaoBioquimica>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_avaliacao_antropometrica")
+	@OneToMany(mappedBy = "paciente",  cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<AvaliacaoAntropometrica> listaAvaliacaoAntropometrica = new ArrayList<AvaliacaoAntropometrica>();
 	
 	public Historico getHistorico() {

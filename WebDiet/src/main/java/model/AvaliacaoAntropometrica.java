@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,30 +29,37 @@ public class AvaliacaoAntropometrica implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_avaliacao", nullable = false)
 	private Date data;
-
 	@Column(precision = 10, scale = 2)
-	private BigDecimal altura;
+	private BigDecimal circunferenciaAbdominal = BigDecimal.ZERO;
+	@Column(precision = 10, scale = 2)
+	private BigDecimal circunferenciaCintura = BigDecimal.ZERO;
+	@Column(precision = 10, scale = 2)
+	private BigDecimal altura = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 3)
-	private BigDecimal pesoAtual;
+	private BigDecimal pesoAtual = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal imc;
+	private BigDecimal imc = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal gordura;
+	private BigDecimal gordura = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal massaMagra;
+	private BigDecimal massaMagra = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal circunferenciaBraco;
+	private BigDecimal circunferenciaBraco = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal circunferenciaPanturrilha;
+	private BigDecimal circunferenciaPanturrilha = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal dobraSubescapular;
+	private BigDecimal dobraSubescapular = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal dobraBiceps;
+	private BigDecimal dobraBiceps = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal dobraTriciptal;
+	private BigDecimal dobraTriciptal = BigDecimal.ZERO;
 	@Column(precision = 10, scale = 2)
-	private BigDecimal dobraSuprailiaca;
-
+	private BigDecimal dobraSuprailiaca = BigDecimal.ZERO;
+	@ManyToOne
+	@JoinColumn(name = "id_paciente", nullable = false)
+	private Paciente paciente;
+	
+	
 	public Date getData() {
 		return data;
 	}
@@ -146,6 +155,30 @@ public class AvaliacaoAntropometrica implements Serializable {
 
 	public void setDobraSuprailiaca(BigDecimal dobraSuprailiaca) {
 		this.dobraSuprailiaca = dobraSuprailiaca;
+	}
+	
+	public BigDecimal getCircunferenciaAbdominal() {
+		return circunferenciaAbdominal;
+	}
+
+	public void setCircunferenciaAbdominal(BigDecimal circunferenciaAbdominal) {
+		this.circunferenciaAbdominal = circunferenciaAbdominal;
+	}
+
+	public BigDecimal getCircunferenciaCintura() {
+		return circunferenciaCintura;
+	}
+
+	public void setCircunferenciaCintura(BigDecimal circunferenciaCintura) {
+		this.circunferenciaCintura = circunferenciaCintura;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public Long getId() {

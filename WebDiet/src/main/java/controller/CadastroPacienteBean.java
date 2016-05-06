@@ -2,6 +2,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
@@ -30,23 +31,44 @@ public class CadastroPacienteBean implements Serializable {
 	
 	private AvaliacaoAntropometrica novaAvaliacaoAntropometrica;
 	private AvaliacaoBioquimica novaAvaliacaoBioquimica;
+	
+	private AvaliacaoBioquimica removerAvaliacaoBioquimica;
 
 	public CadastroPacienteBean() {
 		limpar();
 	}
 	
 	public void limpar(){
+		novaAvaliacaoBioquimica = new AvaliacaoBioquimica();
 		paciente = new Paciente();
 		paciente.setEndereco(new Endereco());
 		paciente.setHistorico(new Historico());
 		paciente.getHistorico().setDoencas(new ArrayList<String>());
 		paciente.getHistorico().setQueixas(new ArrayList<String>());
+		paciente.setListaAvaliacaoAntropometrica(new ArrayList<AvaliacaoAntropometrica>());
+		paciente.setListaAvaliacaoBioquimica(new ArrayList<AvaliacaoBioquimica>());
 	}
 	
 	public void salvar() {
 		paciente = pacienteService.salvar(paciente);
 		//limpar();
 		FacesUtil.addInfoMessage("Paciente adicionado com sucesso.");
+	}
+	
+	public void adicionarAvaliacaoBioquimica(){
+		novaAvaliacaoBioquimica = new AvaliacaoBioquimica();
+	}
+	
+	public void salvarAvaliacaoBioquimica(){
+		novaAvaliacaoBioquimica.setData(new Date());
+		paciente.getListaAvaliacaoBioquimica().add(novaAvaliacaoBioquimica);
+		novaAvaliacaoBioquimica.setPaciente(paciente);
+		FacesUtil.addInfoMessage("Avaliação Bioquímica adicionada com sucesso.");
+	}
+	
+	public void removerAvaliacaoBioquimica(){
+		paciente.getListaAvaliacaoBioquimica().remove(removerAvaliacaoBioquimica);
+		FacesUtil.addInfoMessage("Avaliação Bioquímica removida!");
 	}
 	
 	public AvaliacaoAntropometrica getNovaAvaliacaoAntropometrica() {
@@ -76,6 +98,15 @@ public class CadastroPacienteBean implements Serializable {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public AvaliacaoBioquimica getRemoverAvaliacaoBioquimica() {
+		return removerAvaliacaoBioquimica;
+	}
+
+	public void setRemoverAvaliacaoBioquimica(
+			AvaliacaoBioquimica removerAvaliacaoBioquimica) {
+		this.removerAvaliacaoBioquimica = removerAvaliacaoBioquimica;
 	}
 
 }
