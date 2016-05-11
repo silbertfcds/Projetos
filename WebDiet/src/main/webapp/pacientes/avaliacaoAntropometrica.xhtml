@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	<p:commandButton value="Adicionar" style="margin-top: 20px"
+		action="#{cadastroPacienteBean.adicionarAvaliacaoAntropometrica}"
+		onclick="PF('adicionarAvaAntropometrica').show(); return false"
+		icon="ui-icon-circle-plus" />
+
+	<p:dataTable id="tabelaAntropometrica" var="avaliacaoAntropometrica"
+		value="#{cadastroPacienteBean.paciente.listaAvaliacaoAntropometrica}"
+		emptyMessage="Nenhuma Avaliação Antropometrica cadastrada.">
+		<f:facet name="header">
+           Tabela
+        </f:facet>
+		<p:column headerText="Data de cadastro"
+			style="text-align:center;width:15%;white-space:nowrap;">
+			<h:outputText value="#{avaliacaoAntropometrica.data}">
+				<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm"
+					timeZone="America/Sao_Paulo" />
+			</h:outputText>
+		</p:column>
+
+		<p:column headerText="IMC" style="text-align:center;width:5%;white-space:nowrap;">
+			<h:outputText value="#{avaliacaoAntropometrica.imc}" />
+		</p:column>
+		
+		<p:column headerText="Classificação IMC">
+			<h:outputText value="#{avaliacaoAntropometrica.classificacao.descricao}" />
+		</p:column>
+
+		<p:column style="text-align: center; width: 6%">
+			<p:commandButton icon="ui-icon-trash" title="Excluir"
+				process="@this" oncomplete="PF('confirmacaoAvaliacaoAntro').show()">
+				<f:setPropertyActionListener value="#{avaliacaoAntropometrica}"
+					target="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada}" />
+			</p:commandButton>
+			<p:commandButton icon="ui-icon-search" title="Visualizar"
+				oncomplete="PF('visualizarAntropometrica').show()" update=":frmPaciente:tabView:VisualizarAntropometrica">
+				<f:setPropertyActionListener value="#{avaliacaoAntropometrica}"
+					target="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada}" />
+			</p:commandButton>
+		</p:column>
+
+	</p:dataTable>
+
+	<p:dialog header="Avaliação Antropométrica"
+		id="VisualizarAntropometrica" widgetVar="visualizarAntropometrica" modal="true"
+		resizable="false">
+		<p:fieldset id="fieldsetVisualizarAntro" legend="Resultados"
+			style="margin-bottom:20px">
+			<h:panelGrid id="painelVisualizarAntropometrica" columns="4" cellspacing="4"
+				cellpadding="4">
+
+				<p:outputLabel value="Altura:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.altura} m" style="font-weight:bold"/>
+				
+				<p:outputLabel value="Peso Atual:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.pesoAtual} Kg" style="font-weight:bold"/>
+				
+				<p:outputLabel value="C.C:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.circunferenciaCintura} cm" style="font-weight:bold"/>
+					
+				<p:outputLabel value="C.A:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.circunferenciaAbdominal} cm" style="font-weight:bold"/>
+					
+				<p:outputLabel value="Gordura:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.gordura}%" style="font-weight:bold"/>
+					
+				<p:outputLabel value="Mas. Magra:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.massaMagra}%" style="font-weight:bold"/>
+					
+				<p:outputLabel value="IMC:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.imc}" style="font-weight:bold"/>
+					
+				<p:outputLabel value="Classificação:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoAntropometricaSelecionada.classificacao.descricao}" style="font-weight:bold"/>
+
+			</h:panelGrid>
+		</p:fieldset>
+	</p:dialog>
+
+
+	<p:dialog header="Inclusão de Avaliação Antropométrica"
+		id="dialogAntropometrica" widgetVar="adicionarAvaAntropometrica" modal="true"
+		resizable="false">
+		<p:fieldset id="fieldsetAntro" legend="Resultados"
+			style="margin-bottom:20px">
+			<h:panelGrid id="painelAntropometrica" columns="4" cellspacing="4"
+				cellpadding="4">
+
+				<p:outputLabel value="Altura (m)" />
+				<p:inputText size="8" maxlength="60" onkeyup="validar(this,'num');" styleClass="moeda"
+					value="#{cadastroPacienteBean.novaAvaliacaoAntropometrica.altura}" />
+				
+				<p:outputLabel value="Peso Atual (Kg)" />
+				<p:inputText size="8" maxlength="60" onkeyup="validar(this,'num');" styleClass="moeda"
+					value="#{cadastroPacienteBean.novaAvaliacaoAntropometrica.pesoAtual}" />
+				
+				<p:outputLabel value="C.C (cm)" />
+				<p:inputText size="8" maxlength="60" onkeyup="validar(this,'num');"
+					value="#{cadastroPacienteBean.novaAvaliacaoAntropometrica.circunferenciaCintura}"/>
+					
+				<p:outputLabel value="C.A (cm)" />
+				<p:inputText size="8" maxlength="60" onkeyup="validar(this,'num');"
+					value="#{cadastroPacienteBean.novaAvaliacaoAntropometrica.circunferenciaAbdominal}"/>
+					
+				<p:outputLabel value="% Gordura" />
+				<p:inputText size="8" maxlength="60" onkeyup="validar(this,'num');"
+					value="#{cadastroPacienteBean.novaAvaliacaoAntropometrica.gordura}" />
+					
+				<p:outputLabel value="% Mas. Magra" />
+				<p:inputText size="8" maxlength="60" onkeyup="validar(this,'num');"
+					value="#{cadastroPacienteBean.novaAvaliacaoAntropometrica.massaMagra}" />
+
+				<p:spacer />
+				<p:outputLabel/>
+				<p:outputLabel/>
+				<p:commandButton value="Incluir" style="margin-top: 20px"
+					action="#{cadastroPacienteBean.salvarAvaliacaoAntropometrica}"
+					icon="ui-icon-disk"
+					process="painelAntropometrica"
+					update=":frmPaciente:tabView:tabelaAntropometrica, :frmPaciente:growlPaciente"
+					ajax="true" />
+
+			</h:panelGrid>
+		</p:fieldset>
+	</p:dialog>
+
+	<p:confirmDialog header="Exclusão de Avaliação Antropométrica"
+		message="Tem certeza que deseja excluir a avaliação"
+		widgetVar="confirmacaoAvaliacaoAntro">
+		<p:button value="Não"
+			onclick="PF('confirmacaoAvaliacaoAntro').hide(); return false;" />
+		<p:commandButton value="Sim"
+			oncomplete="PF('confirmacaoAvaliacaoAntro').hide(); return false;"
+			update=":frmPaciente:tabView:tabelaAntropometrica, :frmPaciente:growlPaciente"
+			process="@this"
+			action="#{cadastroPacienteBean.removerAvaliacaoAntropometrica}" />
+	</p:confirmDialog>
+
+
+</ui:composition>
+</html>

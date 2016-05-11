@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -59,6 +61,9 @@ public class AvaliacaoAntropometrica implements Serializable {
 	@JoinColumn(name = "id_paciente", nullable = false)
 	private Paciente paciente;
 	
+	@Column(nullable = false, length = 30)
+	@Enumerated(EnumType.STRING)
+	private ClassificacaoIMC classificacao;
 	
 	public Date getData() {
 		return data;
@@ -187,6 +192,14 @@ public class AvaliacaoAntropometrica implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public ClassificacaoIMC getClassificacao() {
+		return classificacao;
+	}
+
+	public void setClassificacao(ClassificacaoIMC classificacao) {
+		this.classificacao = classificacao;
 	}
 
 	@Override

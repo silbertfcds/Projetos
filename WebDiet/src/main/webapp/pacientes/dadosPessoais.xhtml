@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	<p:panelGrid columns="4" columnClasses="rotulo, campo"
+		id="painelPaciente" style="width: 100%; margin-top: 20px">
+
+		<p:outputLabel for="nome" value="Nome" />
+		<p:inputText id="nome" size="60" maxlength="80"
+			value="#{cadastroPacienteBean.paciente.dadosPessoais.nome}"
+			onkeyup="validar(this,'text');" />
+
+		<p:outputLabel value="Rua" />
+		<h:panelGroup>
+			<p:inputText size="35"
+				value="#{cadastroPacienteBean.paciente.endereco.logradouro}"
+				onkeyup="validar(this,'text');" />
+		</h:panelGroup>
+
+		<p:outputLabel for="dataNascimento" value="Data Nascimento:" />
+		<p:calendar id="dataNascimento"
+			value="#{cadastroPacienteBean.paciente.dadosPessoais.dataNascimento}"
+			pattern="dd/MM/yyyy" mask="true" size="6" />
+
+		<p:outputLabel value="Número" />
+		<h:panelGroup>
+			<p:inputText size="5"
+				value="#{cadastroPacienteBean.paciente.endereco.numero}"
+				onkeyup="validar(this,'num');" />
+		</h:panelGroup>
+
+		<p:outputLabel value="CPF" for="cpf" />
+		<p:inputMask id="cpf" size="20" maxlength="30"
+			value="#{cadastroPacienteBean.paciente.dadosPessoais.documentoReceitaFederal}"
+			mask="9999999999-9" />
+
+		<p:outputLabel value="Complemento" />
+		<h:panelGroup>
+			<p:inputText size="35"
+				value="#{cadastroPacienteBean.paciente.endereco.complemento}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="E-mail" for="email" />
+		<p:inputText id="email" size="40" maxlength="60"
+			value="#{cadastroPacienteBean.paciente.dadosPessoais.email}" />
+
+		<p:outputLabel value="CEP" />
+		<h:panelGroup>
+			<p:inputMask value="#{cadastroPacienteBean.paciente.endereco.cep}"
+				mask="99999-999" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Telefone" for="Telefone" />
+		<p:inputMask id="Telefone"
+			value="#{cadastroPacienteBean.paciente.dadosPessoais.telefone}"
+			mask="(999) 99999-9999" />
+
+		<p:outputLabel value="Cidade" />
+		<h:panelGroup>
+			<p:inputText value="#{cadastroPacienteBean.paciente.endereco.cidade}"
+				onkeyup="validar(this,'text');" />
+
+			<p:outputLabel value="UF" style="margin-left: 20px" />
+			<p:inputText size="2"
+				value="#{cadastroPacienteBean.paciente.endereco.uf}"
+				onkeyup="validar(this,'text');" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Ocupação" for="ocupacao" />
+		<p:inputText id="ocupacao" size="20" maxlength="40"
+			value="#{cadastroPacienteBean.paciente.dadosPessoais.ocupacao}"
+			onkeyup="validar(this,'text');" />
+
+	</p:panelGrid>
+
+</ui:composition>
+</html>
+

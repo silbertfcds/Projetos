@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	<p:panelGrid columns="2" columnClasses="rotulo, campo"
+		id="painelAtividadeFisica" style="width: 100%; margin-top: 20px">
+
+		<p:outputLabel value="Histórico familiar:" />
+		<h:panelGroup>
+			<p:selectManyCheckbox
+				value="#{cadastroPacienteBean.paciente.historico.doencas}"
+				collectionType="java.util.ArrayList">
+				<f:selectItem itemLabel="Diabetes" itemValue="Diabetes" />
+				<f:selectItem itemLabel="Has" itemValue="Has" />
+				<f:selectItem itemLabel="Renal" itemValue="Renal" />
+				<f:selectItem itemLabel="Câncer" itemValue="Cancer" />
+				<f:selectItem itemLabel="Cardiopatia" itemValue="Cardiopatia" />
+			</p:selectManyCheckbox>
+		</h:panelGroup>
+
+		<p:outputLabel value="Outro:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.outrasDoencas}"
+				onkeyup="validar(this,'text');" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Atividade Física:" />
+		<h:panelGroup>
+			<p:selectOneRadio
+				value="#{cadastroPacienteBean.paciente.historico.atividadeFisica}">
+				<f:selectItem itemLabel="Sim" itemValue="true" />
+				<f:selectItem itemLabel="Não" itemValue="false" />
+			</p:selectOneRadio>
+		</h:panelGroup>
+
+		<p:outputLabel value="Tipo:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.tipoAtividadeFisica}"
+				onkeyup="validar(this,'text');" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Duração:" />
+		<h:panelGroup>
+			<p:inputText size="10" maxlength="20"
+				value="#{cadastroPacienteBean.paciente.historico.duracaoAtividadeFisica}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Freqüencia:" />
+		<h:panelGroup>
+			<p:inputText size="10" maxlength="10"
+				value="#{cadastroPacienteBean.paciente.historico.frequenciaAtividadeFisica}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Horas de sono:" />
+		<h:panelGroup>
+			<p:inputText size="10" maxlength="10"
+				value="#{cadastroPacienteBean.paciente.historico.horaSono}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Já fez uso de suplementos alimentares:" />
+		<h:panelGroup>
+			<p:selectOneRadio
+				value="#{cadastroPacienteBean.paciente.historico.suplemento}">
+				<f:selectItem itemLabel="Sim" itemValue="true" />
+				<f:selectItem itemLabel="Não" itemValue="false" />
+			</p:selectOneRadio>
+		</h:panelGroup>
+
+		<p:outputLabel value="Nome do Suplemento:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.descricaoSuplemento}"
+				onkeyup="validar(this,'text');" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Por quanto tempo: " />
+		<h:panelGroup>
+			<p:inputText size="10" maxlength="20"
+				value="#{cadastroPacienteBean.paciente.historico.tempoSuplemento}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Fumante:" />
+		<h:panelGroup>
+			<p:selectOneRadio
+				value="#{cadastroPacienteBean.paciente.historico.fumante}">
+				<f:selectItem itemLabel="Sim" itemValue="true" />
+				<f:selectItem itemLabel="Não" itemValue="false" />
+			</p:selectOneRadio>
+		</h:panelGroup>
+
+		<p:outputLabel value="Quanto tempo:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.tempoFumante}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Ingere bebida alcoólica:" />
+		<h:panelGroup>
+			<p:selectOneRadio
+				value="#{cadastroPacienteBean.paciente.historico.bebida}">
+				<f:selectItem itemLabel="Sim" itemValue="true" />
+				<f:selectItem itemLabel="Não" itemValue="false" />
+			</p:selectOneRadio>
+		</h:panelGroup>
+
+		<p:outputLabel value="Tipo:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.tipoBebida}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Frequência:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.frequenciaBebida}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Medicamentos" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.medicamento}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Já fez tratamento dietético:" />
+		<h:panelGroup>
+			<p:selectOneRadio
+				value="#{cadastroPacienteBean.paciente.historico.tratamentoDietetico}">
+				<f:selectItem itemLabel="Sim" itemValue="true" />
+				<f:selectItem itemLabel="Não" itemValue="false" />
+			</p:selectOneRadio>
+		</h:panelGroup>
+
+		<p:outputLabel value="Qual o objetivo da consulta:" />
+		<h:panelGroup>
+			<p:inputText size="30" maxlength="60"
+				value="#{cadastroPacienteBean.paciente.historico.objetivoConsulta}" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Queixas:" />
+		<h:panelGroup>
+			<p:selectCheckboxMenu
+				value="#{cadastroPacienteBean.paciente.historico.queixas}"
+				label="Queixas" filter="true" filterMatchMode="startsWith"
+				panelStyle="width:250px" collectionType="java.util.ArrayList">
+				<f:selectItem itemLabel="Azia/queimação" itemValue="Azia" />
+				<f:selectItem itemLabel="Náuseas/enjoo" itemValue="Nauseas" />
+				<f:selectItem itemLabel="Vômito" itemValue="Vomito" />
+				<f:selectItem itemLabel="Constipação/fezes ressecadas"
+					itemValue="Constipacao" />
+				<f:selectItem itemLabel="Refluxo g/i" itemValue="Refluxo" />
+				<f:selectItem itemLabel="Sensação de empachamento "
+					itemValue="Empachamento" />
+				<f:selectItem itemLabel="Intolerante ao glúten"
+					itemValue="Intolerante ao gluten" />
+				<f:selectItem itemLabel="Intolerante à lactose"
+					itemValue="Intolerante a lactose" />
+				<f:selectItem itemLabel="Menopausa" itemValue="Menopausa" />
+				<f:selectItem itemLabel="Tpm" itemValue="Tpm" />
+				<f:selectItem itemLabel="Queda de cabelo"
+					itemValue="Queda de cabelo" />
+				<f:selectItem itemLabel="Unhas ressecadas"
+					itemValue="Unhas ressecadas" />
+			</p:selectCheckboxMenu>
+		</h:panelGroup>
+
+	</p:panelGrid>
+</ui:composition>
+</html>

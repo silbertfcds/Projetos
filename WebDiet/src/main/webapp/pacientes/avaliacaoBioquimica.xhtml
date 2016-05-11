@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	<p:commandButton value="Adicionar" style="margin-top: 20px"
+		action="#{cadastroPacienteBean.adicionarAvaliacaoBioquimica}"
+		onclick="PF('adicionarAvaBioquimica').show(); return false"
+		icon="ui-icon-circle-plus" />
+
+	<p:dataTable id="tabelaBioquimica" var="avaliacaoBioquimica"
+		value="#{cadastroPacienteBean.paciente.listaAvaliacaoBioquimica}"
+		emptyMessage="Nenhuma Avaliação Bioquímica cadastrada.">
+		<f:facet name="header">
+           Tabela
+        </f:facet>
+		<p:column headerText="Data de cadastro"
+			style="text-align:center;width:15%;white-space:nowrap;">
+			<h:outputText value="#{avaliacaoBioquimica.data}">
+				<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm"
+					timeZone="America/Sao_Paulo" />
+			</h:outputText>
+		</p:column>
+
+		<p:column>
+			<h:outputText value="Avaliação Bioquímica" />
+		</p:column>
+
+		<p:column style="text-align: center; width: 6%">
+			<p:commandButton icon="ui-icon-trash" title="Excluir"
+				process="@this" oncomplete="PF('confirmacaoAvaliacaoBio').show()">
+				<f:setPropertyActionListener value="#{avaliacaoBioquimica}"
+					target="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada}" />
+			</p:commandButton>
+			<p:commandButton icon="ui-icon-search" title="Visualizar"
+				oncomplete="PF('visualizarBioquimica').show()" update=":frmPaciente:tabView:VisualizarBioquimica">
+				<f:setPropertyActionListener value="#{avaliacaoBioquimica}"
+					target="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada}" />
+			</p:commandButton>
+		</p:column>
+
+	</p:dataTable>
+
+	<p:dialog header="Avaliação Bioquímica" id="VisualizarBioquimica"
+		widgetVar="visualizarBioquimica" modal="true" resizable="false">
+		<p:fieldset id="fieldsetVisualizar" legend="Resultados"
+			style="margin-bottom:20px">
+			<h:panelGrid id="painelBioquimicaVisualizar" columns="4"
+				cellspacing="4" cellpadding="4">
+
+				<p:outputLabel value="Glicose:"/>
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.glicose} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Hematócrito:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.hematocrito}%" style="font-weight:bold"/>
+
+				<p:outputLabel value="Hemoglobina:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.hemoglobina} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Colesterol Total:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.colesterolTotal} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Col. LDL:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.colesterolLdl} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Col. HDL:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.colesterolHdl} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Triglicerídeos:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.triglicerideos} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Ureia:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.ureia} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Creatinina:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.creatinina} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="Ácido Úrico:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.acidoUrico} mg/dl" style="font-weight:bold"/>
+
+				<p:outputLabel value="TGO:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.tgo} U/L" style="font-weight:bold"/>
+
+				<p:outputLabel value="TGP:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.tgp} U/L" style="font-weight:bold"/>
+
+				<p:outputLabel value="Hemoglobina Glicada:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.hemoglobinaGlicada}" style="font-weight:bold"/>
+
+				<p:outputLabel value="Leucócitos:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.leucocitos} U/L" style="font-weight:bold"/>
+
+				<p:outputLabel value="Linfócitos:" />
+				<p:outputLabel
+					value="#{cadastroPacienteBean.avaliacaoBioquimicaSelecionada.linfocitos}%" style="font-weight:bold"/>
+
+			</h:panelGrid>
+		</p:fieldset>
+	</p:dialog>
+
+	<p:dialog header="Inclusão de Avaliação Bioquímica"
+		id="dialogBioquimica" widgetVar="adicionarAvaBioquimica" modal="true"
+		resizable="false">
+		<p:fieldset id="fieldset" legend="Resultados"
+			style="margin-bottom:20px">
+			<h:panelGrid id="painelBioquimica" columns="4" cellspacing="4"
+				cellpadding="4">
+
+				<p:outputLabel value="Glicose (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.glicose}" />
+
+				<p:outputLabel value="Hematócrito (%)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.hematocrito}" />
+
+				<p:outputLabel value="Hemoglobina (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.hemoglobina}" />
+
+				<p:outputLabel value="Colesterol Total (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.colesterolTotal}" />
+
+				<p:outputLabel value="Col. LDL (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.colesterolLdl}" />
+
+				<p:outputLabel value="Col. HDL (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.colesterolHdl}" />
+
+				<p:outputLabel value="Triglicerídeos (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.triglicerideos}" />
+
+				<p:outputLabel value="Ureia (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.ureia}" />
+
+				<p:outputLabel value="Creatinina (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.creatinina}" />
+
+				<p:outputLabel value="Ácido Úrico (mg/dl)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.acidoUrico}" />
+
+				<p:outputLabel value="TGO (U/L)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.tgo}" />
+
+				<p:outputLabel value="TGP (U/L)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.tgp}" />
+
+				<p:outputLabel value="Hemoglobina Glicada" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.hemoglobinaGlicada}" />
+
+				<p:outputLabel value="Leucócitos (U/L)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.leucocitos}" />
+
+				<p:outputLabel value="Linfócitos (%)" />
+				<p:inputText size="15" maxlength="60"
+					value="#{cadastroPacienteBean.novaAvaliacaoBioquimica.linfocitos}" />
+
+				<p:spacer />
+				<p:commandButton value="Incluir" style="margin-top: 20px"
+					action="#{cadastroPacienteBean.salvarAvaliacaoBioquimica}"
+					icon="ui-icon-disk"
+					process="painelBioquimica"
+					update=":frmPaciente:tabView:tabelaBioquimica, :frmPaciente:growlPaciente"
+					ajax="true" />
+
+			</h:panelGrid>
+		</p:fieldset>
+	</p:dialog>
+
+	<p:confirmDialog header="Exclusão de Avaliação Bioquímica"
+		message="Tem certeza que deseja excluir a avaliação"
+		widgetVar="confirmacaoAvaliacaoBio">
+		<p:button value="Não"
+			onclick="PF('confirmacaoAvaliacaoBio').hide(); return false;" />
+		<p:commandButton value="Sim"
+			oncomplete="PF('confirmacaoAvaliacaoBio').hide(); return false;"
+			update=":frmPaciente:tabView:tabelaBioquimica, :frmPaciente:growlPaciente"
+			process="@this"
+			action="#{cadastroPacienteBean.removerAvaliacaoBioquimica}" />
+	</p:confirmDialog>
+
+
+</ui:composition>
+</html>
