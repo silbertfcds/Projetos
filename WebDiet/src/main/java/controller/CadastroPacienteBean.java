@@ -13,6 +13,7 @@ import javax.inject.Named;
 
 import model.AvaliacaoAntropometrica;
 import model.AvaliacaoBioquimica;
+import model.AvaliacaoDietetica;
 import model.ClassificacaoIMC;
 import model.Endereco;
 import model.Historico;
@@ -34,15 +35,18 @@ public class CadastroPacienteBean implements Serializable {
 	
 	private AvaliacaoAntropometrica novaAvaliacaoAntropometrica;
 	private AvaliacaoBioquimica novaAvaliacaoBioquimica;
+	private AvaliacaoDietetica novaAvaliacaoDietetica;
 	
 	private AvaliacaoBioquimica avaliacaoBioquimicaSelecionada;
 	private AvaliacaoAntropometrica avaliacaoAntropometricaSelecionada;
+	private AvaliacaoDietetica avaliacaoDieteticaSelecionada;
 
 	public CadastroPacienteBean() {
 		limpar();
 	}
 	
 	public void limpar(){
+		novaAvaliacaoDietetica = new AvaliacaoDietetica();
 		novaAvaliacaoBioquimica = new AvaliacaoBioquimica();
 		novaAvaliacaoAntropometrica = new AvaliacaoAntropometrica();
 		paciente = new Paciente();
@@ -52,6 +56,7 @@ public class CadastroPacienteBean implements Serializable {
 		paciente.getHistorico().setQueixas(new ArrayList<String>());
 		paciente.setListaAvaliacaoAntropometrica(new ArrayList<AvaliacaoAntropometrica>());
 		paciente.setListaAvaliacaoBioquimica(new ArrayList<AvaliacaoBioquimica>());
+		paciente.setListaAvaliacaoDietetica(new ArrayList<AvaliacaoDietetica>());
 	}
 	
 	public void salvar() {
@@ -66,6 +71,22 @@ public class CadastroPacienteBean implements Serializable {
 	
 	public void adicionarAvaliacaoAntropometrica(){
 		novaAvaliacaoAntropometrica = new AvaliacaoAntropometrica(); 
+	}
+	
+	public void adicionarAvaliacaoDietetica(){
+		novaAvaliacaoDietetica = new AvaliacaoDietetica();
+	}
+	
+	public void salvarAvaliacaoDietetica(){
+		novaAvaliacaoDietetica.setData(new Date());
+		paciente.getListaAvaliacaoDietetica().add(novaAvaliacaoDietetica);
+		novaAvaliacaoDietetica.setPaciente(paciente);
+		FacesUtil.addInfoMessage("Avaliação Dietética adicionada com sucesso.");
+	}
+	
+	public void removerAvaliacaoDietetica(){
+		this.paciente.getListaAvaliacaoDietetica().remove(avaliacaoDieteticaSelecionada);
+		FacesUtil.addInfoMessage("Avaliação Dietética removida!");
 	}
 	
 	public void salvarAvaliacaoBioquimica(){
@@ -170,6 +191,24 @@ public class CadastroPacienteBean implements Serializable {
 	public void setAvaliacaoAntropometricaSelecionada(
 			AvaliacaoAntropometrica avaliacaoAntropometricaSelecionada) {
 		this.avaliacaoAntropometricaSelecionada = avaliacaoAntropometricaSelecionada;
+	}
+
+
+	public AvaliacaoDietetica getAvaliacaoDieteticaSelecionada() {
+		return avaliacaoDieteticaSelecionada;
+	}
+
+	public void setAvaliacaoDieteticaSelecionada(
+			AvaliacaoDietetica avaliacaoDieteticaSelecionada) {
+		this.avaliacaoDieteticaSelecionada = avaliacaoDieteticaSelecionada;
+	}
+
+	public AvaliacaoDietetica getNovaAvaliacaoDietetica() {
+		return novaAvaliacaoDietetica;
+	}
+
+	public void setNovaAvaliacaoDietetica(AvaliacaoDietetica novaAvaliacaoDietetica) {
+		this.novaAvaliacaoDietetica = novaAvaliacaoDietetica;
 	}
 
 }

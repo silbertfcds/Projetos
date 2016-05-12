@@ -44,6 +44,9 @@ public class Paciente implements Serializable {
 	@OneToMany(mappedBy = "paciente",  cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<AvaliacaoAntropometrica> listaAvaliacaoAntropometrica = new ArrayList<AvaliacaoAntropometrica>();
 	
+	@OneToMany(mappedBy = "paciente",  cascade = CascadeType.ALL, orphanRemoval=true)
+	private List<AvaliacaoDietetica> listaAvaliacaoDietetica = new ArrayList<AvaliacaoDietetica>();
+	
 	public Historico getHistorico() {
 		return historico;
 	}
@@ -92,6 +95,15 @@ public class Paciente implements Serializable {
 	public void setListaAvaliacaoAntropometrica(
 			List<AvaliacaoAntropometrica> listaAvaliacaoAntropometrica) {
 		this.listaAvaliacaoAntropometrica = listaAvaliacaoAntropometrica;
+	}
+
+	public List<AvaliacaoDietetica> getListaAvaliacaoDietetica() {
+		return listaAvaliacaoDietetica;
+	}
+
+	public void setListaAvaliacaoDietetica(
+			List<AvaliacaoDietetica> listaAvaliacaoDietetica) {
+		this.listaAvaliacaoDietetica = listaAvaliacaoDietetica;
 	}
 
 	@Transient
