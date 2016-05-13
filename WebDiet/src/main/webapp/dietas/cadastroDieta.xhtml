@@ -9,6 +9,8 @@
 
 	<ui:define name="corpo">
 		<f:metadata>
+			<o:viewParam name="dieta" value="#{cadastroDietaBean.dieta}" />
+			<f:event listener="#{cadastroDietaBean.inicializar}" type="preRenderView" />
 		</f:metadata>
 
 		<h:form id="frmDieta">
@@ -28,7 +30,7 @@
 				<p:toolbarGroup align="right">
 					<p:commandButton value="Adicionar itens" icon="ui-icon-circle-plus" 
 						onclick="PF('adicionarItemDialog').show(); return false"/>
-					<p:button value="Pesquisa" icon="ui-icon-search" />
+					<p:button value="Pesquisa" icon="ui-icon-search" outcome="/dietas/pesquisaDieta"/>
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -37,14 +39,16 @@
 				<p:panelGrid columns="2" columnClasses="rotulo, campo"
 					id="painelDieta" style="width: 100%; margin-top: 20px">
 
-					<p:outputLabel value="Descrição" for="descricao" />
-					<p:inputText id="descricao" size="40" maxlength="60"
-						onkeyup="validar(this,'text');" />
+					<p:outputLabel value="Data Início:" for="dataInicio" />
+					<p:calendar id="dataInicio" value="#{cadastroDietaBean.dieta.dataInicio}" showOn="button" />
+					
+					<p:outputLabel value="Data Termino:" for="dataTermino" />
+					<p:calendar id="dataTermino" value="#{cadastroDietaBean.dieta.dataTermino}" showOn="button" />
 
 					<p:outputLabel value="Paciente" for="paciente" />
 					<p:autoComplete id="paciente" size="40" dropdown="true"
 						value="#{cadastroDietaBean.dieta.paciente}" completeMethod="#{cadastroDietaBean.completarPaciente}"
-						var="paciente" itemLabel="#{paciente.nome}" itemValue="#{paciente}"
+						var="paciente" itemLabel="#{paciente.dadosPessoais.nome}" itemValue="#{paciente}"
 						forceSelection="true" onkeyup="validar(this,'text');" />
 
 				</p:panelGrid>
@@ -109,8 +113,8 @@
 			</p:panel>
 
 
-			<p:dialog header="Inclusão de itens" id="dialogItens"
-				widgetVar="adicionarItemDialog" modal="true" resizable="false">
+			<p:dialog header="Inclusão de itens" id="dialogItens" height="130px" width="400px"
+				widgetVar="adicionarItemDialog" modal="true" resizable="false" showEffect="clip" hideEffect="clip">
 				<h:panelGroup id="inclusaoPanel">
 
 					<h:panelGrid id="painelItem" columns="2">

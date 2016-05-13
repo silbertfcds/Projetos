@@ -33,7 +33,7 @@ public class Dieta implements Serializable {
 	private Long id;
 	@NotNull
 	@Column(name = "total_caloria", nullable = false, precision = 10, scale = 2)
-	private BigDecimal totalCalorias;
+	private BigDecimal totalCalorias = BigDecimal.ZERO;
 	@ManyToOne
 	@JoinColumn(name = "id_paciente", nullable = false)
 	private Paciente paciente;
@@ -41,6 +41,15 @@ public class Dieta implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_criacao", nullable = false)
 	private Date criacao;
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_inicio", nullable = false)
+	private Date dataInicio;
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_termino", nullable = false)
+	private Date dataTermino;
+	
 	@OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<ItemDieta> itens = new ArrayList<>();
 
@@ -82,6 +91,22 @@ public class Dieta implements Serializable {
 
 	public void setItens(List<ItemDieta> itens) {
 		this.itens = itens;
+	}
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataTermino() {
+		return dataTermino;
+	}
+
+	public void setDataTermino(Date dataTermino) {
+		this.dataTermino = dataTermino;
 	}
 
 	@Override

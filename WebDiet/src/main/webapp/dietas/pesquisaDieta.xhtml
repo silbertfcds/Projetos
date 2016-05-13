@@ -1,0 +1,91 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de dieta</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmDieta">
+			<h1>Pesquisa de dieta</h1>
+			<p:growl id="growlPesquisaDieta" showDetail="true" sticky="false" />
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaDietaBean.pesquisar}"  update="@form"
+						icon="ui-icon-search" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/dietas/cadastroDieta"
+						icon="ui-icon-disk" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Data criação"/>
+				<h:panelGroup>
+					<p:outputLabel value=" De "/>
+					<p:calendar id="dataInicio" value="#{pesquisaDietaBean.filtro.cadastroDe}" showOn="button" />
+					<p:outputLabel value=" Até "/>
+					<p:calendar id="dataTermino" value="#{pesquisaDietaBean.filtro.cadastroAte}" showOn="button"/>
+				</h:panelGroup>
+				
+				
+				<p:outputLabel value="Paciente"  />
+				<p:inputText value="#{pesquisaDietaBean.filtro.nomePaciente}" size="50"/>
+
+			</p:panelGrid>
+
+			<p:dataTable id="dietasTable"
+				var="dieta" value="#{pesquisaDietaBean.dietasFiltradas}"
+				style="margin-top: 20px" emptyMessage="Nenhum dieta encontrado."
+				rows="3" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Paciente" style="text-align: left">
+					<h:outputText value="#{dieta.paciente.dadosPessoais.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Data de criação"
+					style="text-align:center;width:15%;white-space:nowrap;">
+					<h:outputText value="#{dieta.criacao}">
+						<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				<p:column style="text-align: center; width: 70px">
+
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/dietas/cadastroDieta">
+						<f:param name="dieta" value="#{dieta.id}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacao').show()"
+						update=":frmDieta:exclusaoConfirmacaoDieta" process="@this">
+						<f:setPropertyActionListener value="#{dieta}"
+							target="#{pesquisaDietaBean.dietaSelecionado}" />
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de dieta"
+				message="Tem certeza que deseja excluir a dieta do cliente #{pesquisaDietaBean.dietaSelecionado.paciente.dadosPessoais.nome}"
+				widgetVar="confirmacao" id="exclusaoConfirmacaoDieta">
+				<p:button value="Não"
+					onclick="PF('confirmacao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacao').hide(); return false;"
+					action="#{pesquisaDietaBean.excluir}"
+					update=":frmDieta:dietasTable, :frmDieta:growlPesquisaDieta"
+					process="@this" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

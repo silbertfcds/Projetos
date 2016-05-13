@@ -24,7 +24,7 @@ public class ItemDieta implements Serializable {
 	@Column(name="id_item_dieta")
 	private Long id;
 	@Column(name = "caloria", nullable = false, precision = 10, scale = 2)
-	private BigDecimal caloria;
+	private BigDecimal caloria = BigDecimal.ZERO;
 	@ManyToOne
 	@JoinColumn(name = "id_alimento", nullable = false)
 	private Alimento alimento;

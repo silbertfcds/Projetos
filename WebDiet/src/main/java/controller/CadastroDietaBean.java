@@ -73,6 +73,23 @@ public class CadastroDietaBean implements Serializable {
 		}
  	}
 	
+	public void inicializar() {
+		if (FacesUtil.isNotPostback()) {
+			if(this.dieta==null){
+				this.dieta = new Dieta();
+			}
+			carregarListasAlimentos();
+		}
+	}
+	
+	public void carregarListasAlimentos(){
+		if(dieta.getItens().size()!=0){
+			for(ItemDieta item: dieta.getItens()){
+				classificacaoItem(item);
+			}
+		}
+	}
+	
 	public void adicionarAlimento(){
 		if(!novoItem.getAlimento().getDescricao().equals("")){
 			classificacaoItem(novoItem);
@@ -97,6 +114,13 @@ public class CadastroDietaBean implements Serializable {
 	public void limpar(){
 		dieta = new Dieta();
 		novoItem = new ItemDieta();
+		
+		listaCafe = new ArrayList<ItemDieta>();
+		listaLancheManha = new ArrayList<ItemDieta>();
+		listaAlmoco = new ArrayList<ItemDieta>();
+		listaLancheTarde = new ArrayList<ItemDieta>();
+		listaJanta = new ArrayList<ItemDieta>();
+		listaCeia = new ArrayList<ItemDieta>();
 	}
 	
 	public Dieta getDieta() {

@@ -9,12 +9,16 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition>
 
-	<p:commandButton value="Adicionar" style="margin-top: 20px"
-		action="#{cadastroPacienteBean.adicionarAvaliacaoDietetica}"
-		onclick="PF('adicionarAvaDietetica').show(); return false"
-		icon="ui-icon-circle-plus" />
+	<p:toolbar style="margin-top: 20px">
+		<p:toolbarGroup align="left">
+			<p:commandButton value="Adicionar"
+				action="#{cadastroPacienteBean.adicionarAvaliacaoDietetica}"
+				onclick="PF('adicionarAvaDietetica').show(); return false"
+				icon="ui-icon-circle-plus" />
+		</p:toolbarGroup>
+	</p:toolbar>
 
-	<p:dataTable id="tabelaDietetica" var="avaliacaoDietetica"
+	<p:dataTable id="tabelaDietetica" var="avaliacaoDietetica" style="margin-top: 20px"
 		value="#{cadastroPacienteBean.paciente.listaAvaliacaoDietetica}"
 		emptyMessage="Nenhuma Avaliação Dietética cadastrada.">
 		<f:facet name="header">

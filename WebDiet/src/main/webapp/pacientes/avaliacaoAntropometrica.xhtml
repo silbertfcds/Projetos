@@ -8,14 +8,19 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-	<p:commandButton value="Adicionar" style="margin-top: 20px"
-		action="#{cadastroPacienteBean.adicionarAvaliacaoAntropometrica}"
-		onclick="PF('adicionarAvaAntropometrica').show(); return false"
-		icon="ui-icon-circle-plus" />
+
+	<p:toolbar style="margin-top: 20px">
+		<p:toolbarGroup align="left">
+			<p:commandButton value="Adicionar"
+				action="#{cadastroPacienteBean.adicionarAvaliacaoAntropometrica}"
+				onclick="PF('adicionarAvaAntropometrica').show(); return false"
+				icon="ui-icon-circle-plus" />
+		</p:toolbarGroup>
+	</p:toolbar>
 
 	<p:dataTable id="tabelaAntropometrica" var="avaliacaoAntropometrica"
 		value="#{cadastroPacienteBean.paciente.listaAvaliacaoAntropometrica}"
-		emptyMessage="Nenhuma Avaliação Antropometrica cadastrada.">
+		emptyMessage="Nenhuma Avaliação Antropometrica cadastrada." style="margin-top: 20px">
 		<f:facet name="header">
            Tabela
         </f:facet>
@@ -98,7 +103,7 @@
 	<p:dialog header="Inclusão de Avaliação Antropométrica"
 		id="dialogAntropometrica" widgetVar="adicionarAvaAntropometrica" modal="true"
 		resizable="false" showEffect="clip" hideEffect="clip">
-		<p:fieldset id="fieldsetAntro" legend="Resultados"
+		<p:fieldset id="fieldsetAntro" legend="Dados"
 			style="margin-bottom:20px">
 			<h:panelGrid id="painelAntropometrica" columns="4" cellspacing="4"
 				cellpadding="4">
