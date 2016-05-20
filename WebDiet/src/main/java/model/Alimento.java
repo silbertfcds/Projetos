@@ -7,10 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -27,9 +29,16 @@ public class Alimento implements Serializable {
 	@Size(max = 80)
 	@Column(nullable = false, length = 80)
 	private String descricao;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
+	@Column(name = "descricaoComplementar")
+	private String descricaoComplementar;
 	@NotNull(message = "é obrigatório")
 	@Column(name="caloria", nullable = false, precision = 10, scale = 2)
-	private BigDecimal caloria;
+	private BigDecimal caloria = BigDecimal.ZERO;
+	@NotNull(message = "é obrigatório")
+	@Column(name="quantidade_padrao", nullable = false, precision = 10, scale = 0)
+	private BigDecimal quantidadePadrao = BigDecimal.ONE;
 
 	public Long getId() {
 		return id;
@@ -53,6 +62,22 @@ public class Alimento implements Serializable {
 
 	public void setCaloria(BigDecimal caloria) {
 		this.caloria = caloria;
+	}
+
+	public BigDecimal getQuantidadePadrao() {
+		return quantidadePadrao;
+	}
+
+	public void setQuantidadePadrao(BigDecimal quantidadePadrao) {
+		this.quantidadePadrao = quantidadePadrao;
+	}
+
+	public String getDescricaoComplementar() {
+		return descricaoComplementar;
+	}
+
+	public void setDescricaoComplementar(String descricaoComplementar) {
+		this.descricaoComplementar = descricaoComplementar;
 	}
 
 	@Override

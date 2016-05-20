@@ -34,7 +34,7 @@ public class Dieta implements Serializable {
 	@NotNull
 	@Column(name = "total_caloria", nullable = false, precision = 10, scale = 2)
 	private BigDecimal totalCalorias = BigDecimal.ZERO;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_paciente", nullable = false)
 	private Paciente paciente;
 	@NotNull
@@ -134,14 +134,11 @@ public class Dieta implements Serializable {
 		return true;
 	}
 
-	public void calcularTotalCalorias(){
+	public void calcularTotalCaloriasDieta(){
 		BigDecimal total = BigDecimal.ZERO;
-		BigDecimal caloria = BigDecimal.ZERO;
 		
 		for(ItemDieta item: itens){
-			caloria = item.getAlimento().getCaloria();
-			item.setCaloria(caloria);
-			total.add(item.getCaloria());
+			total = total.add(item.getCaloriaTotalItem());
 		}
 		
 		setTotalCalorias(total);

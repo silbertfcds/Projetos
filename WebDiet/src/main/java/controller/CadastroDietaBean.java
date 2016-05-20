@@ -38,6 +38,7 @@ public class CadastroDietaBean implements Serializable {
 	private Pacientes pacientes;
 	
 	private ItemDieta novoItem;
+	private ItemDieta itemSelecionado;
 	
 	private List<ItemDieta> listaCafe = new ArrayList<ItemDieta>();
 	private List<ItemDieta> listaLancheManha = new ArrayList<ItemDieta>();
@@ -73,6 +74,22 @@ public class CadastroDietaBean implements Serializable {
 		}
  	}
 	
+	private void removerClassificacaoItem(ItemDieta item){
+		if(item.getHorario().getDescricao().equals("Cafe")){
+			listaCafe.remove(item);
+		}else if(item.getHorario().getDescricao().equals("Lanche Manha")){
+			listaLancheManha.remove(item);
+		}else if(item.getHorario().getDescricao().equals("Almoco")){
+			listaAlmoco.remove(item);
+		}else if(item.getHorario().getDescricao().equals("Lanche Tarde")){
+			listaLancheTarde.remove(item);
+		}else if(item.getHorario().getDescricao().equals("Jantar")){
+			listaJanta.remove(item);
+		}else{
+			listaCeia.remove(item);
+		}
+	}
+	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
 			if(this.dieta==null){
@@ -95,6 +112,8 @@ public class CadastroDietaBean implements Serializable {
 			classificacaoItem(novoItem);
 			dieta.getItens().add(novoItem);
 			//dieta.calcularTotalCalorias();
+			novoItem.getTotalCaloriaItem();
+			dieta.calcularTotalCaloriasDieta();
 			novoItem.setDieta(dieta);
 			novoItem =  new ItemDieta();
 			FacesUtil.addInfoMessage("Item adicionado.");
@@ -103,6 +122,13 @@ public class CadastroDietaBean implements Serializable {
 		}
 	}
 
+	public void excluir(){
+		dieta.getItens().remove(itemSelecionado);
+		removerClassificacaoItem(itemSelecionado);
+		FacesUtil.addInfoMessage("Item removido.");
+		
+	}
+	
 	public List<Alimento> completarAlimento(String descricao){
 		return  alimentos.porDescricao(descricao);
 	}
@@ -199,4 +225,12 @@ public class CadastroDietaBean implements Serializable {
 		this.listaCeia = listaCeia;
 	}
 
+	public ItemDieta getItemSelecionado() {
+		return itemSelecionado;
+	}
+
+	public void setItemSelecionado(ItemDieta itemSelecionado) {
+		this.itemSelecionado = itemSelecionado;
+	}
+	
 }

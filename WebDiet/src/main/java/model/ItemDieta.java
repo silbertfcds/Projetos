@@ -23,15 +23,17 @@ public class ItemDieta implements Serializable {
 	@GeneratedValue
 	@Column(name="id_item_dieta")
 	private Long id;
-	@Column(name = "caloria", nullable = false, precision = 10, scale = 2)
-	private BigDecimal caloria = BigDecimal.ZERO;
+	@Column(name = "caloria_total_item", nullable = false, precision = 10, scale = 2)
+	private BigDecimal caloriaTotalItem = BigDecimal.ZERO;
+	@Column(name = "quantidade", nullable = false, precision = 10, scale = 0)
+	private BigDecimal quantidade = BigDecimal.ONE;
 	@ManyToOne
 	@JoinColumn(name = "id_alimento", nullable = false)
 	private Alimento alimento;
 	@ManyToOne
 	@JoinColumn(name = "id_dieta", nullable = false)
 	private Dieta dieta;
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 15)
 	@Enumerated(EnumType.STRING)
 	private Horario horario;
 
@@ -43,12 +45,12 @@ public class ItemDieta implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getCaloria() {
-		return caloria;
+	public BigDecimal getCaloriaTotalItem() {
+		return caloriaTotalItem;
 	}
 
-	public void setCaloria(BigDecimal caloria) {
-		this.caloria = caloria;
+	public void setCaloriaTotalItem(BigDecimal caloriaTotalItem) {
+		this.caloriaTotalItem = caloriaTotalItem;
 	}
 
 	public Alimento getAlimento() {
@@ -75,6 +77,20 @@ public class ItemDieta implements Serializable {
 		this.horario = horario;
 	}
 
+	public BigDecimal getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(BigDecimal quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public void getTotalCaloriaItem(){
+		BigDecimal total = BigDecimal.ZERO;
+		total = getAlimento().getCaloria().multiply(getQuantidade()).divide(getAlimento().getQuantidadePadrao());
+		setCaloriaTotalItem(total);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

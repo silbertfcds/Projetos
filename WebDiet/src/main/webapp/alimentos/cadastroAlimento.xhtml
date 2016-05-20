@@ -34,13 +34,20 @@
 				id="painelAlimento" style="width: 100%; margin-top: 20px">
 
 				<p:outputLabel value="Descrição" for="descricao" />
-				<p:inputText id="descricao" size="60" maxlength="80"
+				<p:inputText id="descricao" size="50" maxlength="80"
 					value="#{cadastroAlimentoBean.alimento.descricao}"
 					onkeyup="validar(this,'text');" />
-
+					
+				<p:outputLabel value="Descrição complementar"/>
+				<p:inputTextarea rows="4" cols="50" value="#{cadastroAlimentoBean.alimento.descricaoComplementar}"/>
+				
+				<p:outputLabel value="Qtd Padrão" for="quantidadePadrao" />
+				<p:inputText id="quantidadePadrao" size="7"
+					value="#{cadastroAlimentoBean.alimento.quantidadePadrao}"
+					onkeyup="validar(this,'num');" />
 
 				<p:outputLabel value="Qtd Calorias" for="caloria" />
-				<p:inputText id="caloria" size="10"
+				<p:inputText id="caloria" size="7"
 					value="#{cadastroAlimentoBean.alimento.caloria}"
 					onkeyup="validar(this,'num');" />
 			</p:panelGrid>
