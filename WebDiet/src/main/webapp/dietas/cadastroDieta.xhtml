@@ -5,8 +5,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:o="http://omnifaces.org/ui" xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Nova Dieta</ui:define>
-
+	<ui:define name="titulo">#{cadastroDietaBean.dieta.editando ? 'Visualização da Dieta' : 'Nova Dieta'}</ui:define>
+	
 	<ui:define name="corpo">
 		<f:metadata>
 			<o:viewParam name="dieta" value="#{cadastroDietaBean.dieta}" />
@@ -14,7 +14,7 @@
 		</f:metadata>
 
 		<h:form id="frmDieta">
-			<h1>Nova Dieta</h1>
+				<h1>#{cadastroDietaBean.dieta.editando ? 'Visualização da Dieta' : 'Nova Dieta'}</h1>
 			<p:growl id="growlDieta" showDetail="true" sticky="false" />
 
 			<p:toolbar style="margin-top: 20px">
@@ -29,7 +29,7 @@
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:commandButton value="Adicionar itens" icon="ui-icon-circle-plus" 
-						onclick="PF('adicionarItemDialog').show(); return false"/>
+						onclick="PF('adicionarItemDialog').show(); return false" rendered="#{cadastroDietaBean.dieta.novo}"/>
 					<p:button value="Pesquisa" icon="ui-icon-search" outcome="/dietas/pesquisaDieta"/>
 				</p:toolbarGroup>
 			</p:toolbar>
@@ -40,17 +40,30 @@
 					id="painelDieta" style="width: 100%; margin-top: 20px">
 
 					<p:outputLabel value="Data Início:" for="dataInicio" />
-					<p:calendar id="dataInicio" value="#{cadastroDietaBean.dieta.dataInicio}" showOn="button" />
+					<h:panelGroup>
+						<p:calendar id="dataInicio" value="#{cadastroDietaBean.dieta.dataInicio}" showOn="button" rendered="#{cadastroDietaBean.dieta.novo}"/>
+						<p:outputLabel value="#{cadastroDietaBean.dieta.dataInicio}" rendered="#{cadastroDietaBean.dieta.editando}">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+						</p:outputLabel>
+					</h:panelGroup>
 					
 					<p:outputLabel value="Data Termino:" for="dataTermino" />
-					<p:calendar id="dataTermino" value="#{cadastroDietaBean.dieta.dataTermino}" showOn="button" />
-
+					<h:panelGroup>
+						<p:calendar id="dataTermino" value="#{cadastroDietaBean.dieta.dataTermino}" showOn="button" rendered="#{cadastroDietaBean.dieta.novo}"/>
+						<p:outputLabel value="#{cadastroDietaBean.dieta.dataTermino}" rendered="#{cadastroDietaBean.dieta.editando}">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+						</p:outputLabel>
+					</h:panelGroup>
+					
 					<p:outputLabel value="Paciente" for="paciente" />
-					<p:autoComplete id="paciente" size="40" dropdown="true"
-						value="#{cadastroDietaBean.dieta.paciente}" completeMethod="#{cadastroDietaBean.completarPaciente}"
-						var="paciente" itemLabel="#{paciente.dadosPessoais.nome}" itemValue="#{paciente}"
-						forceSelection="true" onkeyup="validar(this,'text');" />
-
+					<h:panelGroup>
+						<p:autoComplete id="paciente" size="40" dropdown="true"
+							value="#{cadastroDietaBean.dieta.paciente}" completeMethod="#{cadastroDietaBean.completarPaciente}"
+							var="paciente" itemLabel="#{paciente.dadosPessoais.nome}" itemValue="#{paciente}"
+							forceSelection="true" onkeyup="validar(this,'text');" rendered="#{cadastroDietaBean.dieta.novo}"/>
+						<p:outputLabel value="#{cadastroDietaBean.dieta.paciente.dadosPessoais.nome}" rendered="#{cadastroDietaBean.dieta.editando}"/>
+					</h:panelGroup>
+					
 				</p:panelGrid>
 			</p:panel>
 
@@ -67,10 +80,10 @@
 					<p:column style="width: 400px">
 						<h:outputText value="#{itensCafe.alimento.descricaoComplementar}" />
 					</p:column>
-					<p:column style="width: 10px">
+					<p:column style="text-align: center; width: 5px">
 						<h:outputText value="#{itensCafe.quantidade}" />
 					</p:column>
-					<p:column style="width: 30px;">
+					<p:column style="width: 30px;" rendered="#{cadastroDietaBean.dieta.novo}">
 						<p:commandButton icon="ui-icon-trash" title="Excluir"
 							action="#{cadastroDietaBean.excluir}" update=":frmDieta:basic, :frmDieta:growlDieta">
 							<f:setPropertyActionListener value="#{itensCafe}"
@@ -89,10 +102,10 @@
 					<p:column style="width: 400px">
 						<h:outputText value="#{lanche.alimento.descricaoComplementar}" />
 					</p:column>
-					<p:column style="width: 10px">
+					<p:column style="text-align: center; width: 5px">
 						<h:outputText value="#{lanche.quantidade}" />
 					</p:column>
-					<p:column style="width: 30px;">
+					<p:column style="width: 30px;" rendered="#{cadastroDietaBean.dieta.novo}">
 						<p:commandButton icon="ui-icon-trash" title="Excluir"
 							action="#{cadastroDietaBean.excluir}" update=":frmDieta:basic, :frmDieta:growlDieta">
 							<f:setPropertyActionListener value="#{lanche}"
@@ -111,10 +124,10 @@
 					<p:column style="width: 400px">
 						<h:outputText value="#{almoco.alimento.descricaoComplementar}" />
 					</p:column>
-					<p:column style="width: 10px">
+					<p:column style="text-align: center; width: 5px">
 						<h:outputText value="#{almoco.quantidade}" />
 					</p:column>
-					<p:column style="width: 30px;">
+					<p:column style="width: 30px;" rendered="#{cadastroDietaBean.dieta.novo}">
 						<p:commandButton icon="ui-icon-trash" title="Excluir"
 							action="#{cadastroDietaBean.excluir}" update=":frmDieta:basic, :frmDieta:growlDieta">
 							<f:setPropertyActionListener value="#{almoco}"
@@ -133,10 +146,10 @@
 					<p:column style="width: 400px">
 						<h:outputText value="#{lancheTarde.alimento.descricaoComplementar}" />
 					</p:column>
-					<p:column style="width: 10px">
+					<p:column style="text-align: center; width: 5px">
 						<h:outputText value="#{lancheTarde.quantidade}" />
 					</p:column>
-					<p:column style="width: 30px;">
+					<p:column style="width: 30px;" rendered="#{cadastroDietaBean.dieta.novo}">
 						<p:commandButton icon="ui-icon-trash" title="Excluir"
 							action="#{cadastroDietaBean.excluir}" update=":frmDieta:basic, :frmDieta:growlDieta">
 							<f:setPropertyActionListener value="#{lancheTarde}"
@@ -155,10 +168,10 @@
 					<p:column style="width: 400px">
 						<h:outputText value="#{jantar.alimento.descricaoComplementar}" />
 					</p:column>
-					<p:column style="width: 10px">
+					<p:column style="text-align: center; width: 5px">
 						<h:outputText value="#{jantar.quantidade}" />
 					</p:column>
-					<p:column style="width: 30px;">
+					<p:column style="width: 30px;" rendered="#{cadastroDietaBean.dieta.novo}">
 						<p:commandButton icon="ui-icon-trash" title="Excluir"
 							action="#{cadastroDietaBean.excluir}" update=":frmDieta:basic, :frmDieta:growlDieta">
 							<f:setPropertyActionListener value="#{jantar}"
@@ -177,10 +190,10 @@
 					<p:column style="width: 400px">
 						<h:outputText value="#{ceia.alimento.descricaoComplementar}" />
 					</p:column>
-					<p:column style="width: 10px">
+					<p:column style="text-align: center; width: 5px">
 						<h:outputText value="#{ceia.quantidade}" />
 					</p:column>
-					<p:column style="width: 30px;">
+					<p:column style="width: 30px;" rendered="#{cadastroDietaBean.dieta.novo}">
 						<p:commandButton icon="ui-icon-trash" title="Excluir"
 							action="#{cadastroDietaBean.excluir}" update=":frmDieta:basic, :frmDieta:growlDieta">
 							<f:setPropertyActionListener value="#{ceia}"
